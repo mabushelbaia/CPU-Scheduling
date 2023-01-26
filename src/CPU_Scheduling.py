@@ -38,12 +38,12 @@ def read_processes():
         for line in file:
             line = line.strip()
             parts = line.split(" ")
+            
             id = int(parts[0])
             arrival_time = int(parts[1])
             bursts = [int(burst) for burst in parts[2:]]
             processes.append(Process(id, arrival_time, bursts))
         processes.sort(key=lambda process: process.arrival_time)
-
 
 def enqueue():
     while True:
