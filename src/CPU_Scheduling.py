@@ -3,10 +3,10 @@ from time import sleep
 from threading import Thread, Lock
 from copy import deepcopy
 import queue
-from src.Workload_Generator import Process, max_time, processes_count
+from Workload_Generator import Process, max_time, processes_count
 
 
-time_scale = .00001
+time_scale = .000001
 arrival_timeline = [x*time_scale for x in range(max_time+1)]
 
 
@@ -59,16 +59,17 @@ def enqueue():
 def increment_waiting_time():
     # increment waiting time for all processes in all ready queues
     for process in ready_queue_1.queue:
-        process.waiting_time += 1
+        process.waiting_time += (1*time_scale)
         
     for process in ready_queue_2.queue:
-        process.waiting_time += 1
+        process.waiting_time += (1*time_scale)
         
     for process in ready_queue_3:
-        process.waiting_time += 1
+        process.waiting_time += (1*time_scale)
         
     for process in ready_queue_4.queue:
-        process.waiting_time += 1
+        process.waiting_time += (1*time_scale)
+    sleep(1*time_scale*.1)
     return
 
 
@@ -112,6 +113,7 @@ def check_all_waiting_queues():
         while len(waiting_queue_4) > 0:
             process = waiting_queue_4.pop(0)
             Thread(target=IO, args=(process,)).start()
+        sleep(1*time_scale*.1)
 
 
 def CPU():
@@ -265,6 +267,8 @@ def CPU():
 
                     break
             running.pop(0)
+        sleep(1*time_scale*0.1)
+    
 
 
 def find_minimum_predicted_time():
@@ -321,6 +325,7 @@ def debug():
             for process in ready_queue_4.queue:
                 print(process, file=file)
             print("------------------------------------------------", file=file)
+        sleep(1*time_scale*0.1)
 
 
 def end():
@@ -329,11 +334,12 @@ def end():
             print("all processes have finished")
             average_waiting_time = 0
             for process in finished_queue:
-                print(f"process {process.id} waiting time is {process.waiting_time}")
+                print(f"process {process.id} waiting time is {process.waiting_time*(1/time_scale)}")
                 average_waiting_time += process.waiting_time
             average_waiting_time /= len(processes)
-            print(f"average waiting time is {average_waiting_time}")
+            print(f"average waiting time is {average_waiting_time*(1/time_scale)}")
             os._exit(0)
+        sleep(1*time_scale*0.1)
             
 
 
