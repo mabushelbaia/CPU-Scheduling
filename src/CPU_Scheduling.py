@@ -60,10 +60,13 @@ def increment_waiting_time():
     # increment waiting time for all processes in all ready queues
     for process in ready_queue_1.queue:
         process.waiting_time += 1
+        
     for process in ready_queue_2.queue:
         process.waiting_time += 1
+        
     for process in ready_queue_3:
         process.waiting_time += 1
+        
     for process in ready_queue_4.queue:
         process.waiting_time += 1
     return
