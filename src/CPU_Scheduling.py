@@ -3,9 +3,9 @@ from time import sleep
 from threading import Thread, Lock
 from copy import deepcopy
 import queue
-from src.Workload_Generator import Process, max_time, processes_count
-
-
+from Workload_Generator import Process, max_time, processes_count
+from prettytable import *
+time = 0 # time counter
 time_scale = .00001
 arrival_timeline = [x*time_scale for x in range(max_time+1)]
 
@@ -46,13 +46,15 @@ def read_processes():
         processes.sort(key=lambda process: process.arrival_time)
 
 def enqueue():
+    timer = 0
     while True:
         for i in arrival_timeline:
             for process in processes:
                 if process.arrival_time*time_scale == i:
                     ready_queue_1.put(process)
-                    print(f"process {process.id} is added to ready queue 1\n")
+                    print(f"process {process.id} is added to ready queue 1 at time {i/time_scale}\n")
             sleep(1*time_scale)
+            timer += 1
         return
 
 
