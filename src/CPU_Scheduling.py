@@ -153,7 +153,7 @@ def CPU():
                     print(f"process {process.id} is added to ready queue 1\n")
                     break
             running.pop(0)
-        if not ready_queue_2.empty() and ready_queue_1.empty() and len(running) == 0:
+        elif not ready_queue_2.empty() and ready_queue_1.empty() and len(running) == 0:
             process = ready_queue_2.get()
             running.append(process)
             print(f"process {process.id} is running\n")
@@ -196,7 +196,7 @@ def CPU():
                     ready_queue_2.put(process)
                     print(f"process {process.id} is added to ready queue 2\n")
             running.pop(0)
-        if len(ready_queue_3) > 0 and ready_queue_1.empty() and ready_queue_2.empty() and len(running) == 0:
+        elif len(ready_queue_3) > 0 and ready_queue_1.empty() and ready_queue_2.empty() and len(running) == 0:
             index = find_minimum_predicted_time()
             min = ready_queue_3[index].predicted_time
             process = ready_queue_3.pop(index)
@@ -241,7 +241,7 @@ def CPU():
                     break
             running.pop(0)
 
-        if not ready_queue_4.empty() and ready_queue_1.empty() and ready_queue_2.empty() and len(ready_queue_3) == 0 and len(running) == 0:
+        elif not ready_queue_4.empty() and ready_queue_1.empty() and ready_queue_2.empty() and len(ready_queue_3) == 0 and len(running) == 0:
             process = ready_queue_4.get()
             running.append(process)
             print(f"process {process.id} is running\n")
