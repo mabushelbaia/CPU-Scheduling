@@ -281,6 +281,50 @@ def find_minimum_predicted_time():
     return index
 
 
+def debug():
+    while True:
+        with open("RR1.txt", "a") as file:
+            print("ready queue 1", file=file)
+            for process in ready_queue_1.queue:
+                print(process, file=file)
+            print("------------------------------------------------", file=file)
+        with open("RR2.txt", "a") as file:
+            print("ready queue 2", file=file)
+            for process in ready_queue_2.queue:
+                print(process, file=file)
+            print("------------------------------------------------", file=file)
+        with open("waiting_queue_1.txt", "a") as file:
+            print("waiting queue 1", file=file)
+            for process in waiting_queue_1:
+                print(process, file=file)
+            print("------------------------------------------------", file=file)
+        with open("waiting_queue_2.txt", "a") as file:
+            print("waiting queue 2", file=file)
+            for process in waiting_queue_2:
+                print(process, file=file)
+            print("------------------------------------------------", file=file)
+        with open("finished_queue.txt", "a") as file:
+            print("finished queue", file=file)
+            for process in finished_queue:
+                print(process, file=file)
+            print("------------------------------------------------", file=file)
+        with open("running.txt", "a") as file:
+            print("running", file=file)
+            for process in running:
+                print(process, file=file)
+            print("------------------------------------------------", file=file)
+        with open("SRTF.txt", "a") as file:
+            print("SRTF", file=file)
+            for process in ready_queue_3:
+                print(process, file=file)
+            print("------------------------------------------------", file=file)
+        with open("FCFS.txt", "a") as file:
+            print("FCFS", file=file)
+            for process in ready_queue_4.queue:
+                print(process, file=file)
+            print("------------------------------------------------", file=file)
+
+
 def end():
     while True:
         if len(finished_queue) == len(processes):

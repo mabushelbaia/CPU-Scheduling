@@ -8,6 +8,7 @@ class Process:
         self.brusts = bursts
         self.rank = 1
         self.waiting = False
+        self.counter = 0
 
     def __str__(self) -> str:
         return f"{self.id} {self.arrival_time} {' '.join([str(brust) for brust in self.brusts])}"
@@ -26,7 +27,8 @@ def read_processes(filename: str) -> list[Process]:
 def write_processes(filename: str) -> None:
     processes_count: int = int(input("Enter the number of processes: "))
     max_time: int = int(input("Enter the maximum arrival time: "))
-    max_cpu_bursts: int = int(input("Enter the maximum number of CPU bursts: "))
+    max_cpu_bursts: int = int(
+        input("Enter the maximum number of CPU bursts: "))
     min_io_time: int = int(input("Enter the minimum IO time: "))
     max_io_time: int = int(input("Enter the maximum IO time: "))
     min_cpu_time: int = int(input("Enter the minimum CPU time: "))

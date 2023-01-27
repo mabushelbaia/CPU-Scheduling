@@ -1,50 +1,141 @@
 from queue import Queue
-from threading import Thread
+from threading import Thread, Lock
 from time import sleep
+from typing import List
 from workload import Process, read_processes
+from copy import deepcopy
 Queue1 = Queue()
 Queue2 = Queue()
-Queue3 = Queue()
+Queue3 = List()
 Queue4 = Queue()
 Waiting = []
+Finished = []
 global_timer = 0
 global_waiting = 0
 running_process = None
+stop_threads = False
+no_intterupts = True
+flags = [True, True, True, True]
+
 
 def enque():
     global global_timer
-    queues = [Queue1, Queue2, Queue3, Queue4]
     while True:
-        for process in ready_processes:
+        if stop_threads:
+            return
+        for process in processes:
             if process.arrival_time == global_timer:
-                queues[process.rank - 1].put(process)
-                ready_processes.remove(process)
+                Queue1.put(process)
+                print("📥\t\tProcess ", process.id,
+                      " is enqueued at time ", global_timer)
+
+        sleep(1 + 10 / 1000)
         global_timer += 1
-        sleep(1)
 
 
 def running():
     global running_process
+    threads = []
     while True:
-        for queue in [Queue1, Queue2, Queue3, Queue4]:
-            if not queue.empty():
-                process = queue.get()
-                print("➡️\tProcess ", process.id, " is running")
-                running_process = process
-                sleep(process.brusts[0])
-                running_process = None
+        if stop_threads:
+            return
+        if not Queue1.empty():
+            if flags[0]:
+                flags[0] = False
+                threads[0] = Thread(
+                    target=round_robin, args=(Queue1, q1, 1)).start()
+        elif not Queue2.empty():
+            if flags[1]:
+                flags[1] = False
+                if threads[0]:
+                    threads[0].join()
+                Thread(target=round_robin, args=(Queue2, q2, 2)).start()
+        elif not Queue3.empty():
+            for thread in threads[:1]:
+                if thread:
+                    thread.join()
+            threads[1] = Thread(target=FCFS, args=(Queue4)).start()
+        elif not Queue4.empty():
+            for thread in threads[:2]:
+                if thread:
+                    thread.join()
+            threads[2] = Thread(target=FCFS, args=(Queue4)).start()
+
+def FCFS(queue: Queue):
+    global running_process, global_timer
+    while queue.empty() == False:
+        process = queue.get()
+        running_process = process
+        print("⚙️\t\tProcess ", process.id,
+              " is running from time ", global_timer)
+        time = 0
+        while time < process.brusts[0]:
+            time += 1
+            sleep(1)
+            process.brusts[0] -= 1
+            if process.brusts[0] == 0:
                 if len(process.brusts) == 1:
-                    print("✅\tProcess ", process.id, " is finished")
-                else:
-                    process.rank += 1
                     process.brusts.pop(0)
-                    process.arrival_time = global_timer + 1
+                    print("✅\t\tProcess ", process.id,
+                          " is finished at time ", global_timer)
+                    running_process = None
+                    Finished.append(process)
+                else:
+                    process.brusts.pop(0)
                     Waiting.append(process)
+                    running_process = None
+
+
+def round_robin(queue: Queue, time_quantum: int, rank: int):
+    global running_process, global_timer, flags
+    time = 0
+    while queue.empty() == False:
+        if flags[0] == False and rank == 2:
+            flags[1] = True
+            return
+        process = queue.get()
+        running_process = process
+        print("⚙️\t\tProcess ", process.id,
+              " is running from time ", global_timer)
+        time = 0
+        while time < time_quantum:
+            time += 1
+            sleep(1)
+            process.brusts[0] -= 1
+            if process.brusts[0] == 0:
+                if len(process.brusts) == 1:
+                    process.brusts.pop(0)
+                    print("✅\t\tProcess ", process.id,
+                          " is finished at time ", global_timer)
+                    running_process = None
+                    Finished.append(process)
+                else:
+                    process.brusts.pop(0)
+                    Waiting.append(process)
+                    running_process = None
                 break
+
+        else:
+            queue.put(process)
+            print("➡️\t\tProcess ", process.id,
+                  " is stopped at time ", global_timer)
+            process.counter += 1
+            if process.counter == 10:
+                process.rank += 1
+                print("⬆️\t\tProcess ", process.id,
+                      " is demoted to rank ", process.rank)
+                process.counter = 0
+    if rank == 1:
+        flags[0] = True
+    elif rank == 2:
+        flags[1] = True
+    return
 
 
 def waiting():
     while True:
+        if stop_threads:
+            return
         if len(Waiting):
             for process in Waiting:
                 if process.waiting:
@@ -57,38 +148,30 @@ def waiting():
 
 def sleep_thread(time: int, process: Process):
     global global_timer
-    print("💤\t Process ", process.id, " is waiting for ", time, " seconds")
+    print("⌛\t\tProcess ", process.id, " is waiting for ",
+          time, " seconds at time ", global_timer)
     sleep(time)
     process.brusts.pop(0)
-    process.arrival_time = global_timer + 1
     Waiting.remove(process)
     process.waiting = False
-    ready_processes.append(process)
+    [Queue1, Queue2, Queue3, Queue4][process.rank - 1].put(process)
 
 
-def debug():
-    global global_waiting
+def finish():
+    global stop_threads
     while True:
-        print("===============================================================",
-              "Time: ", global_timer)
-        sleep(970/1000)
-        print("\tWaiting: ", ", ".join([str(x.id) for x in Waiting]))
-        print("\tProcesses: ", ", ".join(str(x.id) for x in ready_processes))
-        print("\tRunning: ", running_process.id if running_process else "None")
-        print("\tQueue1: ", ", ".join([str(x.id) for x in list(
-            Queue1.queue)]))
-        print("\tQueue2: ", ", ".join([str(x.id) for x in list(
-            Queue2.queue)]))
-        print("\tQueue3: ", ", ".join([str(x.id) for x in list(
-            Queue3.queue)]))
-        print("\tQueue4: ", ", ".join([str(x.id) for x in list(
-            Queue4.queue)]))
-        sleep(3/1000)
+        if len(Finished) == len(processes):
+            stop_threads = True
+            print("😁\t\tAll processes are finished at time ", global_timer)
+            return
 
 
 if __name__ == "__main__":
-    ready_processes=read_processes("processes.txt")
+    processes = read_processes("processes.txt")
+    q1, q2 = map(int, input(
+        "Enter time quantum for queue 1 and queue 2: ").split())
+    alpha = float(input("Enter alpha: "))
     Thread(target=enque).start()
-    Thread(target=debug).start()
     Thread(target=waiting).start()
     Thread(target=running).start()
+    Thread(target=finish).start()
