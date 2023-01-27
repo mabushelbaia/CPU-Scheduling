@@ -3,7 +3,7 @@ from time import sleep
 from threading import Thread, Lock
 from copy import deepcopy
 import queue
-from Workload_Generator import Process, max_time, processes_count
+from workload import Process, max_time, processes_count
 from prettytable import *
 time = 0 # time counter
 time_scale = .00001
