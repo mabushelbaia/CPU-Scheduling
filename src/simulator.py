@@ -15,20 +15,21 @@ running_process = None
 stop_threads = False
 no_interrupts = True
 flags = [True, True, True, True]
-waiting_lock = Lock()
-finished_lock = Lock()
-running_lock = Lock()
+Lock = Lock()
 
 def clock():
     global global_timer
     while True:
         # Send signal to other threads
+        print("Time  ", global_timer, ":")
         for t in threads:
             t.event.set()
+            
         for t in threads:
             t.event.clear()
         sleep(1)
         global_timer += 1
+
 
 def enqueue():
     global global_timer
@@ -38,52 +39,42 @@ def enqueue():
             if process.arrival_time == global_timer:
                 process.IO_time = 3
                 process.temp = 3
-                with waiting_lock:
-                    Waiting.append(process)
+                Waiting.append(process)
                 print(
                     "📥\t\tProcess ", process.id, " is enqueued at time ", global_timer
                 )
-
 
 def waiting():
     global global_timer
     while True:
         event.wait()
-        with waiting_lock:
-            for process in Waiting:
-                process.waiting_time += 1
-                process.IO_time -= 1
-                if process.IO_time == 0:
-                    Waiting.remove(process)
-                    process.remaining_time = 5
-                    Queues[process.rank - 1].put(process)
-                    print(
-                        "📥\t\tProcess ",
-                        process.id,
-                        " is enqueued at time ",
-                        global_timer + 1,
-                        " after waiting for ",process.temp,
-                    )
+        for process in Waiting:
+            process.waiting_time += 1
+            process.IO_time -= 1
+            if process.IO_time == 0:
+                Waiting.remove(process)
+                process.remaining_time = 5
+                Queues[process.rank - 1].put(process)
 
 def running():
     global running_process, global_timer
     while True:
         event.wait()
-        with running_lock:
-            if not running_process:
-                if not Queue1.empty():
-                    running_process = Queue1.get()
-                    print(
-                        "📥\t\tProcess ",
-                        running_process.id,
-                        " is running at time ",
-                        global_timer,
-                    )
-            else:
-                running_process.execution_time += 1
-                running_process.remaining_time -= 1
-                if running_process.remaining_time == 0:
-                    running_process = None
+        if not running_process:
+            if not Queue1.empty():
+                running_process = Queue1.get()
+                print(
+                    "📥\t\tProcess ",
+                    running_process.id,
+                    " is running at time ",
+                    global_timer,
+                )
+        else:
+            running_process.execution_time += 1
+            running_process.remaining_time -= 1
+            if running_process.remaining_time == 1:
+                Finished.append(running_process)
+                running_process = None
 
 if __name__ == "__main__":
     processes = read_processes("processes.txt")
