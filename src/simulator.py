@@ -17,18 +17,18 @@ no_interrupts = True
 flags = [True, True, True, True]
 
 
-def clock():
-    global global_timer
-    while True:
-        # Send signal to other threads
-        print("Time  ", global_timer, ":")
-        for t in threads:
-            t.event.set()
+# def clock():
+#     global global_timer
+#     while True:
+#         # Send signal to other threads
+#         print("Time  ", global_timer, ":")
+#         for t in threads:
+#             t.event.set()
 
-        for t in threads:
-            t.event.clear()
-        sleep(1)
-        global_timer += 1
+#         for t in threads:
+#             t.event.clear()
+#         sleep(1)
+#         global_timer += 1
 
 
 def enqueue():
@@ -43,24 +43,37 @@ def enqueue():
                 )
 
 
-def waiting():
-    global global_timer
-    while True:
-        event.wait()
-        for process in Waiting:
-            process.waiting_time += 1
-            process.IO_time -= 1
-            if process.IO_time == 0:
+# def waiting():
+#     global global_timer
+#     while True:
+#         event.wait()
+#         for process in Waiting:
+#             process.waiting_time += 1
+#             process.IO_time -= 1
+#             if process.IO_time == 0:
+#                 Waiting.remove(process)
+#                 process.remaining_time = 5
+#                 Queues[process.rank - 1].put(process)
+                
+def IO():
+    for process in Waiting:
+        process.bursts[0] -= 1
+        if process.bursts[0] == 0:
+            process.bursts.pop(0)
+            if process.rank==3:
+                Queue3.append(process)
                 Waiting.remove(process)
-                process.remaining_time = 5
-                Queues[process.rank - 1].put(process)
+            else:
+                Queues[process.rank-1].put(process)
 
 
 def running():
+    global global_timer
     while True:
         event.wait()
         if not Queue1.empty:
             running_process = Queue1.get()
+            print("💡 \t\tProcess ", running_process.id, " is running at time ", global_timer)
             counter = 0
             while (
                 counter < time_quantum_1
@@ -68,6 +81,7 @@ def running():
                 and len(running_process.bursts) > 0
             ):
                 running_process.bursts[0] -= 1
+                IO()
                 running_process.counter += 1
                 counter += 1
                 if running_process.bursts[0] == 0:
@@ -86,6 +100,7 @@ def running():
                 if running_process.bursts[0] > 0 and counter == time_quantum_1:
                     Queue1.put(running_process)
                     break
+                global_timer += 1
         elif Queue1.empty() and not Queue2.empty():
             running_process = Queue2.get()
             counter = 0
@@ -95,6 +110,7 @@ def running():
                 and len(running_process.bursts) > 0
             ):
                 running_process.bursts[0] -= 1
+                IO()
                 running_process.counter += 1
                 counter += 1
                 if not Queue1.empty():
@@ -119,12 +135,14 @@ def running():
                 if running_process.bursts[0] > 0 and counter == time_quantum_2:
                     Queue2.put(running_process)
                     break
+                global_timer += 1
         elif Queue1.empty() and Queue2.empty() and len(Queue3) > 0:
             # Sort the queue based on the predicted time
             Queue3.sort(key=lambda x: x.predicted_time)
             running_process = Queue3.pop(0)
             while running_process.bursts[0] > 0 and len(running_process.bursts) > 0:
                 running_process.bursts[0] -= 1
+                IO()
                 if not Queue1.empty() or not Queue2.empty():
                     Queue3.append(running_process)
                     break
@@ -138,7 +156,8 @@ def running():
                         break
                 if len(Queue3) > 0:
                     if (
-                        Queue3.sort(key=lambda x: x.predicted_time)[0].predicted_time
+                        Queue3.sort(key=lambda x: x.predicted_time)[
+                            0].predicted_time
                         < running_process.predicted_time
                     ):
                         running_process.counter += 1
@@ -153,6 +172,7 @@ def running():
                 if running_process.bursts[0] > 0:
                     Queue3.append(running_process)
                     break
+                global_timer += 1
         elif (
             Queue1.empty()
             and Queue2.empty()
@@ -162,6 +182,7 @@ def running():
             running_process = Queue4.get()
             while running_process.bursts[0] > 0 and len(running_process.bursts) > 0:
                 running_process.bursts[0] -= 1
+                IO()
                 if not Queue1.empty() or not Queue2.empty() or len(Queue3) > 0:
                     Queue4.put(running_process)
                     break
@@ -176,13 +197,19 @@ def running():
                 if running_process.bursts[0] > 0:
                     Queue4.put(running_process)
                     break
+                global_timer += 1
+        if not Queue1.empty() or not Queue2.empty() or len(Queue3) > 0 or not Queue4.empty():
+            IO()
+            global_timer += 1
+        sleep(1)
+            
 
 
 if __name__ == "__main__":
     processes = read_processes("processes.txt")
     time_quantum_1 = 2
     time_quantum_2 = 4
-    alpha=0.5
+    alpha = 0.5
     threads = []
     targets = [enqueue,  running, waiting]
     for target in targets:
@@ -191,5 +218,5 @@ if __name__ == "__main__":
         t.event = event
         threads.append(t)
         t.start()
-    control_thread = Thread(target=clock)
-    control_thread.start()
+    # control_thread = Thread(target=clock)
+    # control_thread.start()
