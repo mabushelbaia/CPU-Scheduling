@@ -12,7 +12,7 @@ global_timer = 0
 global_waiting = 0
 running_process = None
 stop_threads = False
-no_intterupts = True
+no_interrupts = True
 flags = [True, True, True, True]
 
 def clock():
