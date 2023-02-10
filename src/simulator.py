@@ -161,7 +161,7 @@ def running():
 if __name__ == "__main__":
     processes = read_processes("processes.txt")
     threads = []
-    targets = [enqueue, waiting, running]
+    targets = [enqueue,  running]
     for target in targets:
         event = Event()
         t = Thread(target=target)

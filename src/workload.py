@@ -15,7 +15,7 @@ class Process:
         self.IO_time = 0
 
     def __str__(self) -> str:
-        return f"{self.id} {self.arrival_time} {' '.join([str(brust) for brust in self.bursts])}"
+        return f"{self.id} {self.arrival_time} {' '.join([str(burst) for burst in self.bursts])}"
 
 
 def read_processes(filename: str) -> list[Process]:
@@ -24,7 +24,7 @@ def read_processes(filename: str) -> list[Process]:
         for line in f:
             process = line.split()
             processes.append(Process(int(process[0]), int(process[1]), [
-                             int(brust) for brust in process[2:]]))
+                             int(burst) for burst in process[2:]]))
     return processes
 
 
