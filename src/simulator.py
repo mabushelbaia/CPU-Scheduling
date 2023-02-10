@@ -182,6 +182,7 @@ if __name__ == "__main__":
     processes = read_processes("processes.txt")
     time_quantum_1 = 2
     time_quantum_2 = 4
+    alpha=0.5
     threads = []
     targets = [enqueue,  running]
     for target in targets:
