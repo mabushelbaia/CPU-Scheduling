@@ -2,6 +2,7 @@ from queue import Queue
 from threading import Thread, Event
 from time import sleep
 from workload import Process, read_processes
+
 Queue1 = Queue()
 Queue2 = Queue()
 Queue3 = Queue()
@@ -10,6 +11,8 @@ Waiting = []
 Finished = []
 global_timer = 0
 running_process = None
+
+
 def clock():
     global global_timer
     while True:
@@ -19,6 +22,8 @@ def clock():
         for t in threads:
             t.event.set()
         global_timer += 1
+
+
 def enqueue():
     global global_timer
     while True:
@@ -26,9 +31,11 @@ def enqueue():
         for process in processes:
             if process.arrival_time == global_timer:
                 Queue1.put(process)
-                print("📥\t\tProcess ", process.id,
-                      " is enqueued at time ", global_timer)
+                print(
+                    "📥\t\tProcess ", process.id, " is enqueued at time ", global_timer
+                )
         event.clear()
+
 
 if __name__ == "__main__":
     processes = read_processes("processes.txt")
