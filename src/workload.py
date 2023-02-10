@@ -7,7 +7,6 @@ class Process:
         self.arrival_time = arrival_time
         self.bursts = bursts
         self.rank = 1
-        self.waiting = False
         self.counter = 0
         self.waiting_time = 0
 
