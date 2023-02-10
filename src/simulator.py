@@ -5,7 +5,7 @@ from workload import Process, read_processes
 
 Queue1 = Queue()
 Queue2 = Queue()
-Queue3 = Queue()
+Queue3: list[Process] = []
 Queue4 = Queue()
 Queues = [Queue1, Queue2, Queue3, Queue4]
 Waiting = []
@@ -17,6 +17,7 @@ no_interrupts = True
 flags = [True, True, True, True]
 time_quantum_1 = int(input("Enter the time quantum for queue 1: "))
 time_quantum_2 = int(input("Enter the time quantum for queue 2: "))
+alpha = int(input("Enter the alpha value: "))
 
 waiting_lock = Lock()
 finished_lock = Lock()
@@ -95,32 +96,66 @@ def running():
                         break
                 if running_process.counter == 10*time_quantum_2:
                     running_process.rank += 1
+                    running_process.predicted_time = (alpha * running_process.bursts[0]) + ((1 - alpha) * running_process.predicted_time)
+                    running_process.counter = 0
                     Queue3.put(running_process)
                     break
                 if running_process.bursts[0] > 0 and counter == time_quantum_2:
                     Queue2.put(running_process)
                     break
+        elif Queue1.empty() and Queue2.empty() and len(Queue3) > 0:
+            # Sort the queue based on the predicted time
+            Queue3.sort(key=lambda x: x.predicted_time)
+            running_process = Queue3.pop(0)
+            while running_process.bursts[0]>0 and len(running_process.bursts) > 0:
+                running_process.bursts[0] -= 1
+                if not Queue1.empty() or not Queue2.empty():
+                    Queue3.append(running_process)
+                    break
+                if running_process.bursts[0] == 0:
+                    running_process.bursts.pop(0)
+                    if len(running_process.bursts) > 0:
+                        Waiting.append(running_process)
+                        break
+                    else:
+                        Finished.append(running_process)
+                        break
+                if len(Queue3) > 0:
+                    if Queue3.sort(key=lambda x: x.predicted_time)[0].predicted_time < running_process.predicted_time:
+                        running_process.counter += 1
+                        if running_process.counter==3:
+                            running_process.rank += 1
+                            running_process.counter = 0
+                            Queue4.put(running_process)
+                            break
+                        else:
+                            Queue3.append(running_process)
+                            break
+                if running_process.bursts[0] > 0:
+                    Queue3.append(running_process)
+                    break
+        elif Queue1.empty() and Queue2.empty() and len(Queue3) == 0 and not Queue4.empty():
+            running_process = Queue4.get()
+            while running_process.bursts[0]>0 and len(running_process.bursts) > 0:
+                running_process.bursts[0] -= 1
+                if not Queue1.empty() or not Queue2.empty() or len(Queue3) > 0:
+                    Queue4.put(running_process)
+                    break
+                if running_process.bursts[0] == 0:
+                    running_process.bursts.pop(0)
+                    if len(running_process.bursts) > 0:
+                        Waiting.append(running_process)
+                        break
+                    else:
+                        Finished.append(running_process)
+                        break
+                if running_process.bursts[0] > 0:
+                    Queue4.put(running_process)
+                    break
+                
+        
+        
 
-
-def waiting():
-    global global_timer
-    while True:
-        event.wait()
-        with waiting_lock:
-            for process in Waiting:
-                process.waiting_time += 1
-                process.IO_time -= 1
-                if process.IO_time == 0:
-                    Waiting.remove(process)
-                    process.remaining_time = 5
-                    Queues[process.rank - 1].put(process)
-                    print(
-                        "📥\t\tProcess ",
-                        process.id,
-                        " is enqueued at time ",
-                        global_timer + 1,
-                        " after waiting for ", process.temp,
-                    )
 
 
 if __name__ == "__main__":
