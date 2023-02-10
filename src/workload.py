@@ -9,6 +9,7 @@ class Process:
         self.rank = 1
         self.waiting = False
         self.counter = 0
+        self.waiting_time = 0
 
     def __str__(self) -> str:
         return f"{self.id} {self.arrival_time} {' '.join([str(brust) for brust in self.brusts])}"

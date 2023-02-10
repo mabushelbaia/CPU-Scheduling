@@ -4,7 +4,6 @@ from threading import Thread, Lock
 from copy import deepcopy
 import queue
 from workload import Process, max_time, processes_count
-from prettytable import *
 time = 0 # time counter
 time_scale = .00001
 arrival_timeline = [x*time_scale for x in range(max_time+1)]
