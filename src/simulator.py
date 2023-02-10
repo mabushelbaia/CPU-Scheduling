@@ -15,7 +15,7 @@ global_timer = 0
 running_process: Process = None
 stop_threads = False
 no_interrupts = True
-flags = [True, True, True, True]
+flags = [False, False, False, False]
 
 
 
@@ -42,21 +42,8 @@ def read_processes(filename: str) -> list[Process]:
 
 
 
-def enqueue():
-    global global_timer
-    while True:
-        for process in processes:
-            if process.arrival_time == global_timer:
-                Queue1.append(process)
-                processes.remove(process)
-                print("\n📥 Process ", process.id,
-                      " arrived at time ", global_timer, "\n")
-        if len(processes) == 0:
-            return
-
-
-
 def increment_waiting():
+    global flags
     for process in Queue1:
         process.waiting_time += 1
     for process in Queue2:
@@ -65,29 +52,45 @@ def increment_waiting():
         process.waiting_time += 1
     for process in Queue4:
         process.waiting_time += 1
+    flags[2]=False
     return
 
 
 def IO():
-    for process in Waiting:
-        process.bursts[0] -= 1
-        if process.bursts[0] == 0:
-            process.bursts.pop(0)
-            if process.rank == 1:
-                Queue1.append(process)
-            elif process.rank == 2:
-                Queue2.append(process)
-            elif process.rank == 3:
-                process.predicted_time = (alpha * process.bursts[0])+((1-alpha)*process.predicted_time)
-                Queue3.append(process)
-            elif process.rank == 4:
-                Queue4.append(process)
-            Waiting.remove(process)
+    global flags
+    print("IO")
+    if len(Waiting) > 0:
+        for process in Waiting:
+            process.bursts[0] -= 1
+            if process.bursts[0] == 0:
+                process.bursts.pop(0)
+                if process.rank == 1:
+                    Queue1.append(process)
+                elif process.rank == 2:
+                    Queue2.append(process)
+                elif process.rank == 3:
+                    process.predicted_time = (alpha * process.bursts[0])+((1-alpha)*process.predicted_time)
+                    Queue3.append(process)
+                elif process.rank == 4:
+                    Queue4.append(process)
+                Waiting.remove(process)
+    flags[1]=False
+    return
 
+
+def enqueue():
+    print("Enqueue")
+    global flags,global_timer
+    for process in processes:
+        if process.arrival_time == global_timer:
+            Queue1.append(process)
+    flags[0]=False
+    return
 
 
 def running():
-    global global_timer
+    global global_timer,flags
+    global_timer=0
     while True:
         print(len(Queue1), len(Queue2), len(Queue3), len(Queue4))
         if len(Queue1) > 0:
@@ -101,10 +104,19 @@ def running():
                 running_process.bursts[0] -= 1
                 print("\n💡 Process ", running_process.id,
                       " is running at time ", global_timer, "in queue 1\n")
-                sleep(1*.001)
+                sleep(1*.00001)
                 global_timer += 1
+                flags[0]=True
+                flags[1]=True
+                flags[2]=True
+                enqueue()
                 IO()
                 increment_waiting()
+                
+                while flags[0] or flags[1] or flags[2]:
+                    sleep(1*.00001)
+                    
+                    
                 running_process.counter += 1
                 counter += 1
                 if running_process.bursts[0] == 0:
@@ -131,6 +143,7 @@ def running():
                     print("\n📤Process ", running_process.id, " finished its time quantum at time ",
                           global_timer, " and is enqueued to queue 1\n")
                     break
+            continue
 
         elif len(Queue1) == 0 and len(Queue2) > 0:
             running_process = Queue2.pop(0)
@@ -143,10 +156,18 @@ def running():
                 running_process.bursts[0] -= 1
                 print("\n💡 Process ", running_process.id,
                       " is running at time ", global_timer, "in queue 2\n")
-                sleep(1*.001)
+                sleep(1*.00001)
                 global_timer += 1
+                flags[0]=True
+                flags[1]=True
+                flags[2]=True
+                enqueue()
                 IO()
                 increment_waiting()
+                
+                while flags[0] or flags[1] or flags[2]:
+                    sleep(1*.00001)
+                    
                 running_process.counter += 1
                 counter += 1
                 if len(Queue1) > 0:
@@ -182,6 +203,7 @@ def running():
                     print("\n📤Process ", running_process.id, " finished its time quantum at time ",
                           global_timer, " and is enqueued to queue 2\n")
                     break
+            continue
 
         elif len(Queue1) == 0 and len(Queue2) == 0 and len(Queue3) > 0:
             # Sort the queue based on the predicted time
@@ -193,10 +215,19 @@ def running():
                 
                 print("\n💡 Process ", running_process.id,
                       " is running at time ", global_timer, "in queue 3\n")
-                sleep(1*.001)
+                sleep(1*.00001)
                 global_timer += 1
+                flags[0]=True
+                flags[1]=True
+                flags[2]=True
+                enqueue()
                 IO()
                 increment_waiting()
+                
+                while flags[0] or flags[1] or flags[2]:
+                    sleep(1*.00001)
+                    
+                    
                 if len(Queue1) > 0 or len(Queue2) > 0:
                     Queue3.append(running_process)
                     print("\n📤Process ", running_process.id, " has been preempted at time ",
@@ -230,6 +261,7 @@ def running():
                             print("\n📤Process ", running_process.id, " has been preempted at time ",
                                   global_timer, " to queue 3 by a process in queue 3\n")
                             break
+                continue
         elif (
             len(Queue1) == 0
             and len(Queue2) == 0
@@ -240,12 +272,21 @@ def running():
 
             while running_process.bursts[0] > 0 and len(running_process.bursts) > 0:
                 running_process.bursts[0] -= 1
-                sleep(1*.001)
-                global_timer += 1
+                sleep(1*.00001)
                 print("\n💡 Process ", running_process.id,
                       " is running at time ", global_timer, "in queue 4\n")
+                global_timer += 1
+                flags[0]=True
+                flags[1]=True
+                flags[2]=True
+                enqueue()
                 IO()
                 increment_waiting()
+                
+                while flags[0] or flags[1] or flags[2]:
+                    sleep(1*.00001)
+                    
+                    
                 if len(Queue1) > 0 or len(Queue2) > 0 or len(Queue3) > 0:
                     Queue4.append(running_process)
                     print("\n📤Process ", running_process.id, " has been preempted at time ",
@@ -263,16 +304,22 @@ def running():
                         print("\n📤Process ", running_process.id,
                               " is enqueued at time ", global_timer, " to finished queue\n")
                         break
+                continue
                 
-        if len(Finished) == processes_count:
-            for process in Finished:
-                print("Process ", process.id, " finished")
-            return
         
-        if len(Queue1) == 0 and len(Queue2) == 0 and len(Queue3) == 0 and len(Queue4) == 0:
-            IO()
-            global_timer += 1
-            sleep(1*.001)
+            
+        flags[0]=True
+        flags[1]=True
+        enqueue()
+        IO()
+        while flags[0] or flags[1]:
+            sleep(1*.00001)
+        if len(Finished) == len(processes):
+            for process in Finished:
+                    print("Process ", process.id, " finished")
+            return
+        global_timer += 1
+        
         
         
 
@@ -280,6 +327,4 @@ def running():
 if __name__ == "__main__":
     read_processes("processes.txt")
     t1 = Thread(target=running)
-    t2 = Thread(target=enqueue)
     t1.start()
-    t2.start()
