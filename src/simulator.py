@@ -63,16 +63,16 @@ def round_robin(queue: Queue, time_quantum: int, rank: int):
             if time == 0:
                 print("⚙️\t\tProcess ", process.id,
                       " is running from time ", global_timer)
-            process.brusts[0] -= 1
-            if process.brusts[0] == 0:
-                if len(process.brusts) == 1:
-                    process.brusts.pop(0)
+            process.bursts[0] -= 1
+            if process.bursts[0] == 0:
+                if len(process.bursts) == 1:
+                    process.bursts.pop(0)
                     print("✅\t\tProcess ", process.id,
                           " is finished at time ", global_timer)
                     running_process = None
                     Finished.append(process)
                 else:
-                    process.brusts.pop(0)
+                    process.bursts.pop(0)
                     Waiting.append(process)
                     running_process = None
                 break
@@ -102,7 +102,7 @@ def waiting():
                 if process.waiting:
                     continue
                 Thread(target=sleep_thread, args=(
-                    process.brusts[0], process)).start()
+                    process.bursts[0], process)).start()
                 process.waiting = True
         sleep(1)
 
@@ -112,7 +112,7 @@ def sleep_thread(time: int, process: Process):
     print("⌛\t\tProcess ", process.id, " is waiting for ",
           time, " seconds at time ", global_timer)
     sleep(time)
-    process.brusts.pop(0)
+    process.bursts.pop(0)
     Waiting.remove(process)
     process.waiting = False
     [Queue1, Queue2, Queue3, Queue4][process.rank - 1].put(process)
@@ -144,21 +144,21 @@ def FCFS(queue: Queue):
         process = queue.get()
         running_process = process
         time = 0
-        while time < process.brusts[0]:
+        while time < process.bursts[0]:
             lock.acquire()
             if time == 0:
                 print("⚙️\t\tProcess ", process.id,
               " is running from time ", global_timer)
-            process.brusts[0] -= 1
-            if process.brusts[0] == 0:
-                if len(process.brusts) == 1:
-                    process.brusts.pop(0)
+            process.bursts[0] -= 1
+            if process.bursts[0] == 0:
+                if len(process.bursts) == 1:
+                    process.bursts.pop(0)
                     print("✅\t\tProcess ", process.id,
                           " is finished at time ", global_timer)
                     running_process = None
                     Finished.append(process)
                 else:
-                    process.brusts.pop(0)
+                    process.bursts.pop(0)
                     Waiting.append(process)
                     running_process = None
             time += 1

@@ -5,14 +5,14 @@ class Process:
     def __init__(self, id: int, arrival_time: int, bursts: list[int]) -> None:
         self.id = id
         self.arrival_time = arrival_time
-        self.brusts = bursts
+        self.bursts = bursts
         self.rank = 1
         self.waiting = False
         self.counter = 0
         self.waiting_time = 0
 
     def __str__(self) -> str:
-        return f"{self.id} {self.arrival_time} {' '.join([str(brust) for brust in self.brusts])}"
+        return f"{self.id} {self.arrival_time} {' '.join([str(brust) for brust in self.bursts])}"
 
 
 def read_processes(filename: str) -> list[Process]:
