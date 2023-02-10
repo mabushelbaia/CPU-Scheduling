@@ -51,7 +51,6 @@ def enqueue():
                 processes.remove(process)
                 print("\n📥 Process ", process.id,
                       " arrived at time ", global_timer, "\n")
-        sleep(1*.000001)
         if len(processes) == 0:
             return
 
@@ -265,17 +264,15 @@ def running():
                               " is enqueued at time ", global_timer, " to finished queue\n")
                         break
                 
-        if len(Finished) == 6:
+        if len(Finished) == processes_count:
             for process in Finished:
                 print("Process ", process.id, " finished")
             return
-        elif len(Queue1) == 0 and len(Queue2) == 0 and len(Queue3) == 0 and len(Queue4) == 0 and len(Waiting) > 0:
+        
+        if len(Queue1) == 0 and len(Queue2) == 0 and len(Queue3) == 0 and len(Queue4) == 0:
             IO()
             global_timer += 1
             sleep(1*.001)
-            continue
-        sleep(1*.001)
-        global_timer += 1
         
         
 
