@@ -1,12 +1,12 @@
 from queue import Queue
-from threading import Thread, Lock
+from threading import Thread, Semaphore, Lock
 from time import sleep
 from typing import List
 from workload import Process, read_processes
 from copy import deepcopy
 Queue1 = Queue()
 Queue2 = Queue()
-Queue3 = List()
+Queue3 = Queue()
 Queue4 = Queue()
 Waiting = []
 Finished = []
@@ -28,14 +28,12 @@ def enque():
                 Queue1.put(process)
                 print("📥\t\tProcess ", process.id,
                       " is enqueued at time ", global_timer)
-
-        sleep(1 + 10 / 1000)
-        global_timer += 1
+        sleep(1)
 
 
 def running():
-    global running_process
-    threads = []
+    global running_process, global_timer
+    threads = [None, None, None, None]
     while True:
         if stop_threads:
             return
@@ -50,57 +48,23 @@ def running():
                 if threads[0]:
                     threads[0].join()
                 Thread(target=round_robin, args=(Queue2, q2, 2)).start()
-        elif not Queue3.empty():
-            for thread in threads[:1]:
-                if thread:
-                    thread.join()
-            threads[1] = Thread(target=FCFS, args=(Queue4)).start()
-        elif not Queue4.empty():
-            for thread in threads[:2]:
-                if thread:
-                    thread.join()
-            threads[2] = Thread(target=FCFS, args=(Queue4)).start()
-
-def FCFS(queue: Queue):
-    global running_process, global_timer
-    while queue.empty() == False:
-        process = queue.get()
-        running_process = process
-        print("⚙️\t\tProcess ", process.id,
-              " is running from time ", global_timer)
-        time = 0
-        while time < process.brusts[0]:
-            time += 1
-            sleep(1)
-            process.brusts[0] -= 1
-            if process.brusts[0] == 0:
-                if len(process.brusts) == 1:
-                    process.brusts.pop(0)
-                    print("✅\t\tProcess ", process.id,
-                          " is finished at time ", global_timer)
-                    running_process = None
-                    Finished.append(process)
-                else:
-                    process.brusts.pop(0)
-                    Waiting.append(process)
-                    running_process = None
+        global_timer += 1
+        sleep(1)
 
 
 def round_robin(queue: Queue, time_quantum: int, rank: int):
     global running_process, global_timer, flags
-    time = 0
-    while queue.empty() == False:
+    while not queue.empty():
         if flags[0] == False and rank == 2:
             flags[1] = True
             return
         process = queue.get()
         running_process = process
-        print("⚙️\t\tProcess ", process.id,
-              " is running from time ", global_timer)
         time = 0
         while time < time_quantum:
-            time += 1
-            sleep(1)
+            if time == 0:
+                print("⚙️\t\tProcess ", process.id,
+                      " is running from time ", global_timer)
             process.brusts[0] -= 1
             if process.brusts[0] == 0:
                 if len(process.brusts) == 1:
@@ -114,11 +78,10 @@ def round_robin(queue: Queue, time_quantum: int, rank: int):
                     Waiting.append(process)
                     running_process = None
                 break
-
+            time += 1
+            sleep(1)
         else:
             queue.put(process)
-            print("➡️\t\tProcess ", process.id,
-                  " is stopped at time ", global_timer)
             process.counter += 1
             if process.counter == 10:
                 process.rank += 1
@@ -171,7 +134,37 @@ if __name__ == "__main__":
     q1, q2 = map(int, input(
         "Enter time quantum for queue 1 and queue 2: ").split())
     alpha = float(input("Enter alpha: "))
+    Thread(target=running).start()
     Thread(target=enque).start()
     Thread(target=waiting).start()
-    Thread(target=running).start()
     Thread(target=finish).start()
+
+
+"""
+def FCFS(queue: Queue):
+    global running_process, global_timer
+    while queue.empty() == False:
+        process = queue.get()
+        running_process = process
+        time = 0
+        while time < process.brusts[0]:
+            lock.acquire()
+            if time == 0:
+                print("⚙️\t\tProcess ", process.id,
+              " is running from time ", global_timer)
+            process.brusts[0] -= 1
+            if process.brusts[0] == 0:
+                if len(process.brusts) == 1:
+                    process.brusts.pop(0)
+                    print("✅\t\tProcess ", process.id,
+                          " is finished at time ", global_timer)
+                    running_process = None
+                    Finished.append(process)
+                else:
+                    process.brusts.pop(0)
+                    Waiting.append(process)
+                    running_process = None
+            time += 1
+            lock.release()
+            sleep(1)
+"""
