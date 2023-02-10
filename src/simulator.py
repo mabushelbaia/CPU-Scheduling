@@ -1,5 +1,5 @@
 from queue import Queue
-from threading import Thread
+from threading import Thread, Event
 from time import sleep
 from workload import Process, read_processes
 Queue1 = Queue()
