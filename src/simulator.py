@@ -11,11 +11,10 @@ Waiting = []
 Finished = []
 global_timer = 0
 running_process = None
-
-
 stop_threads = False
 no_interrupts = True
 flags = [True, True, True, True]
+
 
 def clock():
     global global_timer
