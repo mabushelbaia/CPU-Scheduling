@@ -184,7 +184,7 @@ if __name__ == "__main__":
     time_quantum_2 = 4
     alpha=0.5
     threads = []
-    targets = [enqueue,  running]
+    targets = [enqueue,  running, waiting]
     for target in targets:
         event = Event()
         t = Thread(target=target)
