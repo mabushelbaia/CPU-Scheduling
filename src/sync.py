@@ -5,7 +5,7 @@ import time
 def clock():
     while True:
         print("Clock: Ticking...")
-        time.sleep(5)
+        time.sleep(1)
         # Send signal to other threads
         for t in threads:
             t.event.set()
