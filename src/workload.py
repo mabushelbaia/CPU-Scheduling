@@ -18,14 +18,6 @@ class Process:
         return f"{self.id} {self.arrival_time} {' '.join([str(burst) for burst in self.bursts])}"
 
 
-def read_processes(filename: str) -> list[Process]:
-    processes = []
-    with open(filename) as f:
-        for line in f:
-            process = line.split()
-            processes.append(Process(int(process[0]), int(process[1]), [
-                             int(burst) for burst in process[2:]]))
-    return processes
 
 
 def write_processes(filename: str) -> None:
