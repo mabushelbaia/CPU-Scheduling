@@ -15,15 +15,12 @@ running_process: Process = None
 stop_threads = False
 no_interrupts = True
 flags = [True, True, True, True]
-<< << << < HEAD
 time_quantum_1 = int(input("Enter the time quantum for queue 1: "))
 time_quantum_2 = int(input("Enter the time quantum for queue 2: "))
 
-== == == =
 waiting_lock = Lock()
 finished_lock = Lock()
 running_lock = Lock()
->>>>>> > 3eb8016fe810ce8af4056cdd3b6b76a2a9386ccb
 
 
 def clock():
