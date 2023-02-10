@@ -1,9 +1,7 @@
 from queue import Queue
-from threading import Thread, Semaphore, Lock
+from threading import Thread
 from time import sleep
-from typing import List
 from workload import Process, read_processes
-from copy import deepcopy
 Queue1 = Queue()
 Queue2 = Queue()
 Queue3 = Queue()
@@ -138,7 +136,6 @@ if __name__ == "__main__":
     Thread(target=enque).start()
     Thread(target=waiting).start()
     Thread(target=finish).start()
-
 
 """
 def FCFS(queue: Queue):
