@@ -15,82 +15,30 @@ stop_threads = False
 no_intterupts = True
 flags = [True, True, True, True]
 
+def clock():
+    global global_timer
+    while True:
+        sleep(1)
+        # Send signal to other threads
+        for t in threads:
+            t.event.set()
+        # Reset event for next iteration
+        for t in threads:
+            t.event.clear()
+        global_timer += 1
+        
 
-def enque():
+def enqueue():
     global global_timer
     while True:
         if stop_threads:
             return
+        event.wait()
         for process in processes:
             if process.arrival_time == global_timer:
                 Queue1.put(process)
                 print("📥\t\tProcess ", process.id,
                       " is enqueued at time ", global_timer)
-        sleep(1)
-
-
-def running():
-    global running_process, global_timer
-    threads = [None, None, None, None]
-    while True:
-        if stop_threads:
-            return
-        if not Queue1.empty():
-            if flags[0]:
-                flags[0] = False
-                threads[0] = Thread(
-                    target=round_robin, args=(Queue1, q1, 1)).start()
-        elif not Queue2.empty():
-            if flags[1]:
-                flags[1] = False
-                if threads[0]:
-                    threads[0].join()
-                Thread(target=round_robin, args=(Queue2, q2, 2)).start()
-        global_timer += 1
-        sleep(1)
-
-
-def round_robin(queue: Queue, time_quantum: int, rank: int):
-    global running_process, global_timer, flags
-    while not queue.empty():
-        if flags[0] == False and rank == 2:
-            flags[1] = True
-            return
-        process = queue.get()
-        running_process = process
-        time = 0
-        while time < time_quantum:
-            if time == 0:
-                print("⚙️\t\tProcess ", process.id,
-                      " is running from time ", global_timer)
-            process.bursts[0] -= 1
-            if process.bursts[0] == 0:
-                if len(process.bursts) == 1:
-                    process.bursts.pop(0)
-                    print("✅\t\tProcess ", process.id,
-                          " is finished at time ", global_timer)
-                    running_process = None
-                    Finished.append(process)
-                else:
-                    process.bursts.pop(0)
-                    Waiting.append(process)
-                    running_process = None
-                break
-            time += 1
-            sleep(1)
-        else:
-            queue.put(process)
-            process.counter += 1
-            if process.counter == 10:
-                process.rank += 1
-                print("⬆️\t\tProcess ", process.id,
-                      " is demoted to rank ", process.rank)
-                process.counter = 0
-    if rank == 1:
-        flags[0] = True
-    elif rank == 2:
-        flags[1] = True
-    return
 
 
 def waiting():
@@ -132,36 +80,10 @@ if __name__ == "__main__":
     q1, q2 = map(int, input(
         "Enter time quantum for queue 1 and queue 2: ").split())
     alpha = float(input("Enter alpha: "))
-    Thread(target=running).start()
-    Thread(target=enque).start()
-    Thread(target=waiting).start()
-    Thread(target=finish).start()
-
-"""
-def FCFS(queue: Queue):
-    global running_process, global_timer
-    while queue.empty() == False:
-        process = queue.get()
-        running_process = process
-        time = 0
-        while time < process.bursts[0]:
-            lock.acquire()
-            if time == 0:
-                print("⚙️\t\tProcess ", process.id,
-              " is running from time ", global_timer)
-            process.bursts[0] -= 1
-            if process.bursts[0] == 0:
-                if len(process.bursts) == 1:
-                    process.bursts.pop(0)
-                    print("✅\t\tProcess ", process.id,
-                          " is finished at time ", global_timer)
-                    running_process = None
-                    Finished.append(process)
-                else:
-                    process.bursts.pop(0)
-                    Waiting.append(process)
-                    running_process = None
-            time += 1
-            lock.release()
-            sleep(1)
-"""
+    # Create a list to store the threads
+    threads = []
+    event = Event()
+    t = Thread(target=enqueue)
+    t.event = event
+    threads.append(t)
+    t.start()
