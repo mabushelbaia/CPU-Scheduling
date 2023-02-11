@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>CPU Scheduling GUI</title>
+  </head>
+  <body>
+    <h1>CPU Scheduling GUI</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Process Name</th>
+          <th>Process State</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for process in data['processes'] %}
+        <tr>
+          <td>{{ process.name }}</td>
+          <td>{{ process.state }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
