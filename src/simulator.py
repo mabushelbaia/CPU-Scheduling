@@ -33,21 +33,27 @@ def clock():
                     process.status = "Ready"
                     to_append = process
                 else:                           # New process or finished waiting
+                    if process.rank == 1 and process.running_time >= 10  * 20:
+                        process.rank = 2
+                    elif process.rank == 2 and process.running_time >= 10 * 10:
+                        process.rank = 3
                     Queues[process.rank - 1].put(process)
                     if process in Waiting:
                         Waiting.remove(process)
                     print("📥\t\tProcess ", process.id, " is enqueued at time ", global_timer, "ms")
                 to_remove.append(process)
+        
         if to_append is not None:
-            if to_append.rank == 1  and to_append.counter == 3:
-                to_append.rank = 2
-                to_append.counter = 0
-                print("🔽\t\tProcess ", process.id, " is demoted to rank ", process.rank, " at time ", global_timer, "ms")
-                print("📥\t\tProcess ", process.id, " is enqueued at time ", global_timer, "ms")
+            if process.rank == 1 and process.running_time >= 10  * 20:
+                process.rank = 2
+            elif process.rank == 2 and process.running_time >= 10 * 10:
+                process.rank = 3
             Queues[to_append.rank - 1].put(to_append)
+            print("📥\t\tProcess ", process.id, " is enqueued at time ", global_timer, "ms")
             to_append = None
+            
         if running_process is not None:
-            if not Queue1.empty():
+            if not Queue1.empty(): # For preemption
                 if running_process.rank > 1:
                     Queues[running_process.rank - 1].put(running_process)
                     running_process.status = "Ready"
@@ -57,7 +63,7 @@ def clock():
                     print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
 
             elif  not Queue2.empty():
-                if running_process.rank > 2:
+                if running_process.rank > 2: # For preemption
                     Queues[running_process.rank - 1].put(running_process)
                     running_process.status = "Ready"
                     running_process = Queue2.get()
@@ -65,12 +71,12 @@ def clock():
                     running_process.quantum = 5
                     print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
         else:
-            if not Queue1.empty():
+            if not Queue1.empty(): # Running process is None so we can run a new process
                 running_process = Queue1.get()
                 running_process.status = "Running"
                 running_process.quantum = 10
                 print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
-            elif not Queue2.empty():
+            elif not Queue2.empty(): # Running process is None so we can run a new process
                 running_process = Queue2.get()
                 running_process.status = "Running"
                 running_process.quantum = 5
@@ -120,8 +126,8 @@ def running():
             if running_process.rank == 1 or running_process.rank == 2:
                 running_process.bursts[0] -= 1
                 running_process.quantum -= 1
+                running_process.running_time += 1
             if running_process.quantum == 0 or running_process.bursts[0] == 0:
-                running_process.counter += 1
                 if running_process.bursts[0] == 0:
                     if len(running_process.bursts) == 1:
                         running_process.status = "Finished"
