@@ -1,8 +1,9 @@
+import os
 from queue import Queue
 from threading import Thread, Event
 from time import sleep
 from workload import Process, read_processes
-
+from matplotlib import pyplot as plt
 Queue1 = Queue()
 Queue2 = Queue()
 Queue3 = []
@@ -19,11 +20,14 @@ def get_next_queue(process: Process):
         process.rank = 3
         process.predicted_time = alpha * process.bursts[0] + (1 - alpha) * process.predicted_time
         process.running_time = 0
+    elif process.rank == 3:
+        process.predicted_time = alpha * process.bursts[0] + (1 - alpha) * process.predicted_time
     Queues[process.rank - 1].put(process) if process.rank != 3 else Queue3.append(process)
     print("📥\t\tProcess ", process.id, " is enqueued at time ", global_timer, "ms")
 
 def clock():
     global global_timer, running_process, num_processes
+    dict = []
     while True:
         print("============================================")
         to_remove = []
@@ -105,10 +109,16 @@ def clock():
                 running_process.status = "Running"
                 running_process.quantum = running_process.bursts[0]
                 print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.bursts[0], "ms")
-                    
-        
+        for i, q in enumerate(Queues):
+            if i == 2:
+                for elem in Queue3:
+                    elem.waiting_time += 1
+            else:
+                for elem in list(q.queue):
+                    elem.waiting_time += 1
         for process in to_remove:
             processes.remove(process)
+        dict.append(f"P{running_process.id}" if running_process else 0)
         for t in threads:
             t.event.set()
         for t in threads:
@@ -117,13 +127,14 @@ def clock():
         print("Time:  ", global_timer)
         print("Queue 1: ", [x.id for x in list(Queue1.queue)])
         print("Queue 2: ", [x.id for x in list(Queue2.queue)])
-        print("Queue 3: ", [x.id for x in list(Queue3.queue)])
+        print("Queue 3: ", [x.id for x in Queue3])
         print("Waiting: ", [x.id for x in Waiting])
         print("Running: ", running_process.id if running_process else None)
         print("Finished: ", [x.id for x in Finished])
         if len(Finished) == num_processes:
             global_timer = -1
-            return
+            print(sum([x.waiting_time for x in Finished]) / len(Finished))
+            os._exit(0)
         global_timer += 1
 
 
