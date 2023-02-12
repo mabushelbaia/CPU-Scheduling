@@ -8,7 +8,7 @@ class Process:
         self.bursts = bursts
         self.rank = 1
         self.counter = 0
-        self.status = "Readay"
+        self.status = "Ready"
         self.quantum = 0
 
     def __str__(self) -> str:

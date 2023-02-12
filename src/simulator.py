@@ -14,7 +14,6 @@ Finished = []
 
 def clock():
     global global_timer, running_process, num_processes
-    flag = True
     while True:
         print("============================================")
         to_remove = []
@@ -29,25 +28,18 @@ def clock():
                     print("🏁\t\tProcess ", process.id, " Finished at time ", global_timer, "ms")
                     running_process = None
                     Finished.append(process)
-                elif process.status == "Running": # Preempted
+                elif process.status == "Running": # Preempted process
                     running_process = None
                     process.status = "Ready"
                     to_append = process
-                else:
-                    if process.rank == 1 and process.counter == 3:
-                        process.rank = 2
-                        process.counter = 0
-                        print("🔽\t\tProcess ", process.id, " is demoted to rank ", process.rank, " at time ", global_timer, "ms")
-                    if flag:
-                        process.rank = 2
-                        flag = False
+                else:                           # New process or finished waiting
                     Queues[process.rank - 1].put(process)
                     if process in Waiting:
                         Waiting.remove(process)
                     print("📥\t\tProcess ", process.id, " is enqueued at time ", global_timer, "ms")
                 to_remove.append(process)
         if to_append is not None:
-            if to_append.rank == 1 and to_append.counter == 3:
+            if to_append.rank == 1  and to_append.counter == 3:
                 to_append.rank = 2
                 to_append.counter = 0
                 print("🔽\t\tProcess ", process.id, " is demoted to rank ", process.rank, " at time ", global_timer, "ms")
@@ -83,6 +75,7 @@ def clock():
                 running_process.status = "Running"
                 running_process.quantum = 5
                 print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
+        
         for process in to_remove:
             processes.remove(process)
         for t in threads:
@@ -104,7 +97,6 @@ def clock():
 
 def waiting():
     global global_timer
-    
     while True:
         if global_timer == -1:
             return
