@@ -14,7 +14,6 @@ Finished = []
 
 def clock():
     global global_timer, running_process, num_processes
-    flag = True
     while True:
         print("============================================")
         to_remove = []
@@ -34,20 +33,17 @@ def clock():
                     process.status = "Ready"
                     to_append = process
                 else:
-                    if process.rank == 1 and process.counter == 3:
+                    if process.rank == 1 and process.counter == 10:
                         process.rank = 2
                         process.counter = 0
                         print("🔽\t\tProcess ", process.id, " is demoted to rank ", process.rank, " at time ", global_timer, "ms")
-                    if flag:
-                        process.rank = 2
-                        flag = False
                     Queues[process.rank - 1].put(process)
                     if process in Waiting:
                         Waiting.remove(process)
                     print("📥\t\tProcess ", process.id, " is enqueued at time ", global_timer, "ms")
                 to_remove.append(process)
         if to_append is not None:
-            if to_append.rank == 1 and to_append.counter == 3:
+            if to_append.rank == 1 and to_append.counter == 10:
                 to_append.rank = 2
                 to_append.counter = 0
                 print("🔽\t\tProcess ", process.id, " is demoted to rank ", process.rank, " at time ", global_timer, "ms")
