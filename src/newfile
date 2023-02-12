@@ -1,0 +1,2434 @@
+============================================
+📥		Process  0  is enqueued at time  0 ms
+🏃		Process  (0, 2)  is running at time  0 ms for  5 ms
+Time:   0
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  []
+============================================
+Time:   1
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  []
+============================================
+📥		Process  1  is enqueued at time  2 ms
+📥		Process  2  is enqueued at time  2 ms
+🏃		Process  (1, 1)  is running at time  2 ms for  10 ms
+Time:   2
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   3
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   4
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   5
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   6
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   7
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   8
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   9
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   10
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   11
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+🏃		Process  (2, 1)  is running at time  12 ms for  10 ms
+Time:   12
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   13
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   14
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   15
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   16
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   17
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   18
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   19
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   20
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   21
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+🏃		Process  (1, 1)  is running at time  22 ms for  10 ms
+Time:   22
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   23
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   24
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   25
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   26
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   27
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   28
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   29
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   30
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   31
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+🏃		Process  (2, 1)  is running at time  32 ms for  10 ms
+Time:   32
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   33
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   34
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   35
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   36
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   37
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   38
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   39
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   40
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   41
+Queue 1:  [1]
+Queue 2:  [0]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+🏃		Process  (1, 1)  is running at time  42 ms for  10 ms
+Time:   42
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   43
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   44
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   45
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   46
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   47
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   48
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   49
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   50
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   51
+Queue 1:  [2]
+Queue 2:  [0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+🔽		Process  1  is demoted to rank  2  at time  52 ms
+📥		Process  1  is enqueued at time  52 ms
+🏃		Process  (2, 1)  is running at time  52 ms for  10 ms
+Time:   52
+Queue 1:  []
+Queue 2:  [0, 1]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   53
+Queue 1:  []
+Queue 2:  [0, 1]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   54
+Queue 1:  []
+Queue 2:  [0, 1]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   55
+Queue 1:  []
+Queue 2:  [0, 1]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   56
+Queue 1:  []
+Queue 2:  [0, 1]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   57
+Queue 1:  []
+Queue 2:  [0, 1]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   58
+Queue 1:  []
+Queue 2:  [0, 1]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   59
+Queue 1:  []
+Queue 2:  [0, 1]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   60
+Queue 1:  []
+Queue 2:  [0, 1]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   61
+Queue 1:  []
+Queue 2:  [0, 1]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+🔽		Process  2  is demoted to rank  2  at time  62 ms
+📥		Process  2  is enqueued at time  62 ms
+🏃		Process  (0, 2)  is running at time  62 ms for  5 ms
+Time:   62
+Queue 1:  []
+Queue 2:  [1, 2]
+Waiting:  []
+Running:  0
+Finished:  []
+============================================
+Time:   63
+Queue 1:  []
+Queue 2:  [1, 2]
+Waiting:  []
+Running:  0
+Finished:  []
+============================================
+Time:   64
+Queue 1:  []
+Queue 2:  [1, 2]
+Waiting:  []
+Running:  0
+Finished:  []
+============================================
+Time:   65
+Queue 1:  []
+Queue 2:  [1, 2]
+Waiting:  []
+Running:  0
+Finished:  []
+============================================
+Time:   66
+Queue 1:  []
+Queue 2:  [1, 2]
+Waiting:  []
+Running:  0
+Finished:  []
+============================================
+🏃		Process  (1, 2)  is running at time  67 ms for  5 ms
+Time:   67
+Queue 1:  []
+Queue 2:  [2, 0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   68
+Queue 1:  []
+Queue 2:  [2, 0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   69
+Queue 1:  []
+Queue 2:  [2, 0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   70
+Queue 1:  []
+Queue 2:  [2, 0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   71
+Queue 1:  []
+Queue 2:  [2, 0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+🏃		Process  (2, 2)  is running at time  72 ms for  5 ms
+Time:   72
+Queue 1:  []
+Queue 2:  [0, 1]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   73
+Queue 1:  []
+Queue 2:  [0, 1]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   74
+Queue 1:  []
+Queue 2:  [0, 1]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   75
+Queue 1:  []
+Queue 2:  [0, 1]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+Time:   76
+Queue 1:  []
+Queue 2:  [0, 1]
+Waiting:  []
+Running:  2
+Finished:  []
+============================================
+🏃		Process  (0, 2)  is running at time  77 ms for  5 ms
+Time:   77
+Queue 1:  []
+Queue 2:  [1, 2]
+Waiting:  []
+Running:  0
+Finished:  []
+============================================
+Time:   78
+Queue 1:  []
+Queue 2:  [1, 2]
+Waiting:  []
+Running:  0
+Finished:  []
+============================================
+Time:   79
+Queue 1:  []
+Queue 2:  [1, 2]
+Waiting:  []
+Running:  0
+Finished:  []
+============================================
+Time:   80
+Queue 1:  []
+Queue 2:  [1, 2]
+Waiting:  []
+Running:  0
+Finished:  []
+============================================
+Time:   81
+Queue 1:  []
+Queue 2:  [1, 2]
+Waiting:  []
+Running:  0
+Finished:  []
+============================================
+🏃		Process  (1, 2)  is running at time  82 ms for  5 ms
+Time:   82
+Queue 1:  []
+Queue 2:  [2, 0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   83
+Queue 1:  []
+Queue 2:  [2, 0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   84
+Queue 1:  []
+Queue 2:  [2, 0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   85
+Queue 1:  []
+Queue 2:  [2, 0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+Time:   86
+Queue 1:  []
+Queue 2:  [2, 0]
+Waiting:  []
+Running:  1
+Finished:  []
+============================================
+⏳		Process  1  started waiting at time  87 for  150 ms
+🏃		Process  (2, 2)  is running at time  87 ms for  5 ms
+Time:   87
+Queue 1:  []
+Queue 2:  [0]
+Waiting:  [1]
+Running:  2
+Finished:  []
+============================================
+Time:   88
+Queue 1:  []
+Queue 2:  [0]
+Waiting:  [1]
+Running:  2
+Finished:  []
+============================================
+Time:   89
+Queue 1:  []
+Queue 2:  [0]
+Waiting:  [1]
+Running:  2
+Finished:  []
+============================================
+Time:   90
+Queue 1:  []
+Queue 2:  [0]
+Waiting:  [1]
+Running:  2
+Finished:  []
+============================================
+Time:   91
+Queue 1:  []
+Queue 2:  [0]
+Waiting:  [1]
+Running:  2
+Finished:  []
+============================================
+⏳		Process  2  started waiting at time  92 for  80 ms
+🏃		Process  (0, 2)  is running at time  92 ms for  5 ms
+Time:   92
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   93
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   94
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   95
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   96
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+🏃		Process  (0, 2)  is running at time  97 ms for  5 ms
+Time:   97
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   98
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   99
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   100
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   101
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+🏃		Process  (0, 2)  is running at time  102 ms for  5 ms
+Time:   102
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   103
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   104
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   105
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   106
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+🏃		Process  (0, 2)  is running at time  107 ms for  5 ms
+Time:   107
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   108
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   109
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   110
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   111
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+🏃		Process  (0, 2)  is running at time  112 ms for  5 ms
+Time:   112
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   113
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   114
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   115
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   116
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+🏃		Process  (0, 2)  is running at time  117 ms for  5 ms
+Time:   117
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   118
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+Time:   119
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2]
+Running:  0
+Finished:  []
+============================================
+⏳		Process  0  started waiting at time  120 for  200 ms
+Time:   120
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   121
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   122
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   123
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   124
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   125
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   126
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   127
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   128
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   129
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   130
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   131
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   132
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   133
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   134
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   135
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   136
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   137
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   138
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   139
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   140
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   141
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   142
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   143
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   144
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   145
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   146
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   147
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   148
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   149
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   150
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   151
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   152
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   153
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   154
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   155
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   156
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   157
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   158
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   159
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   160
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   161
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   162
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   163
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   164
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   165
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   166
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   167
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   168
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   169
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   170
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+Time:   171
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 2, 0]
+Running:  None
+Finished:  []
+============================================
+📥		Process  2  is enqueued at time  172 ms
+🏃		Process  (2, 2)  is running at time  172 ms for  5 ms
+Time:   172
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   173
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   174
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   175
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   176
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+🏃		Process  (2, 2)  is running at time  177 ms for  5 ms
+Time:   177
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   178
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   179
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   180
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   181
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+🏃		Process  (2, 2)  is running at time  182 ms for  5 ms
+Time:   182
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   183
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   184
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   185
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   186
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+🏃		Process  (2, 2)  is running at time  187 ms for  5 ms
+Time:   187
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   188
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   189
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   190
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+Time:   191
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  2
+Finished:  []
+============================================
+🏁		Process  2  Finished at time  192 ms
+Time:   192
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   193
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   194
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   195
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   196
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   197
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   198
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   199
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   200
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   201
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   202
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   203
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   204
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   205
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   206
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   207
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   208
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   209
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   210
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   211
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   212
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   213
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   214
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   215
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   216
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   217
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   218
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   219
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   220
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   221
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   222
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   223
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   224
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   225
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   226
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   227
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   228
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   229
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   230
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   231
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   232
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   233
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   234
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   235
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+Time:   236
+Queue 1:  []
+Queue 2:  []
+Waiting:  [1, 0]
+Running:  None
+Finished:  [2]
+============================================
+📥		Process  1  is enqueued at time  237 ms
+🏃		Process  (1, 2)  is running at time  237 ms for  5 ms
+Time:   237
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   238
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   239
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   240
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   241
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+🏃		Process  (1, 2)  is running at time  242 ms for  5 ms
+Time:   242
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   243
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   244
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   245
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   246
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+🏃		Process  (1, 2)  is running at time  247 ms for  5 ms
+Time:   247
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   248
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   249
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   250
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   251
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+🏃		Process  (1, 2)  is running at time  252 ms for  5 ms
+Time:   252
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   253
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   254
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   255
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+Time:   256
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  1
+Finished:  [2]
+============================================
+🏁		Process  1  Finished at time  257 ms
+Time:   257
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   258
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   259
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   260
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   261
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   262
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   263
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   264
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   265
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   266
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   267
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   268
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   269
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   270
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   271
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   272
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   273
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   274
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   275
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   276
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   277
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   278
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   279
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   280
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   281
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   282
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   283
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   284
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   285
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   286
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   287
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   288
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   289
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   290
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   291
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   292
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   293
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   294
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   295
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   296
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   297
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   298
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   299
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   300
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   301
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   302
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   303
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   304
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   305
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   306
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   307
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   308
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   309
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   310
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   311
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   312
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   313
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   314
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   315
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   316
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   317
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   318
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+Time:   319
+Queue 1:  []
+Queue 2:  []
+Waiting:  [0]
+Running:  None
+Finished:  [2, 1]
+============================================
+📥		Process  0  is enqueued at time  320 ms
+🏃		Process  (0, 2)  is running at time  320 ms for  5 ms
+Time:   320
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   321
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   322
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   323
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   324
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+🏃		Process  (0, 2)  is running at time  325 ms for  5 ms
+Time:   325
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   326
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   327
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   328
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   329
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+🏃		Process  (0, 2)  is running at time  330 ms for  5 ms
+Time:   330
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   331
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   332
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   333
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   334
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+🏃		Process  (0, 2)  is running at time  335 ms for  5 ms
+Time:   335
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   336
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   337
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   338
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+Time:   339
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  0
+Finished:  [2, 1]
+============================================
+🏁		Process  0  Finished at time  340 ms
+Time:   340
+Queue 1:  []
+Queue 2:  []
+Waiting:  []
+Running:  None
+Finished:  [2, 1, 0]

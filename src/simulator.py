@@ -14,6 +14,7 @@ Finished = []
 
 def clock():
     global global_timer, running_process, num_processes
+    flag = True
     while True:
         print("============================================")
         to_remove = []
@@ -37,6 +38,9 @@ def clock():
                         process.rank = 2
                         process.counter = 0
                         print("🔽\t\tProcess ", process.id, " is demoted to rank ", process.rank, " at time ", global_timer, "ms")
+                    if flag:
+                        process.rank = 2
+                        flag = False
                     Queues[process.rank - 1].put(process)
                     if process in Waiting:
                         Waiting.remove(process)
@@ -50,16 +54,35 @@ def clock():
                 print("📥\t\tProcess ", process.id, " is enqueued at time ", global_timer, "ms")
             Queues[to_append.rank - 1].put(to_append)
             to_append = None
-        if running_process is None and not Queue1.empty():
-            running_process = Queue1.get()
-            running_process.status = "Running"
-            running_process.quantum = 10
-            print("🏃\t\tProcess ", running_process.id, " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
-        elif running_process is None and not Queue2.empty():
-            running_process = Queue2.get()
-            running_process.quantum = 5
-            running_process.status = "Running"
-            print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
+        if running_process is not None:
+            if not Queue1.empty():
+                if running_process.rank > 1:
+                    Queues[running_process.rank - 1].put(running_process)
+                    running_process.status = "Ready"
+                    running_process = Queue1.get()
+                    running_process.status = "Running"
+                    running_process.quantum = 10
+                    print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
+
+            elif  not Queue2.empty():
+                if running_process.rank > 2:
+                    Queues[running_process.rank - 1].put(running_process)
+                    running_process.status = "Ready"
+                    running_process = Queue2.get()
+                    running_process.status = "Running"
+                    running_process.quantum = 5
+                    print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
+        else:
+            if not Queue1.empty():
+                running_process = Queue1.get()
+                running_process.status = "Running"
+                running_process.quantum = 10
+                print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
+            elif not Queue2.empty():
+                running_process = Queue2.get()
+                running_process.status = "Running"
+                running_process.quantum = 5
+                print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
         for process in to_remove:
             processes.remove(process)
         for t in threads:
