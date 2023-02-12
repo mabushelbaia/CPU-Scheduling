@@ -167,9 +167,16 @@ def clock():
                     current=[i[0],i[1],i[2],i[2]]
             data.append((current[0],current[1],current[2],current[3]))
             global_timer = -1
+            #empty spaces
+            empty=0
             for i in data:
-                print(i)
+                if i[0]==0 and i[1]==0:
+                    space=i[3]-i[2]
+                    empty+=space
             gantt_chart(data)
+            cpu_utilization=(global_timer-empty)/global_timer
+            
+            print(f"CPU Utilization: {cpu_utilization}%")
             print(sum([x.waiting_time for x in Finished]) / len(Finished))
             os._exit(0)
         global_timer += 1
