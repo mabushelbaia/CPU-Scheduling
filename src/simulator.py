@@ -97,6 +97,7 @@ def clock():
         print("Running: ", running_process.id if running_process else None)
         print("Finished: ", [x.id for x in Finished])
         if len(Finished) == num_processes:
+            global_timer = -1
             return
         global_timer += 1
 
@@ -105,6 +106,8 @@ def waiting():
     global global_timer
     
     while True:
+        if global_timer == -1:
+            return
         event.wait()
         for process in Waiting:
             if process.bursts[0] == 1:
@@ -118,6 +121,8 @@ def waiting():
 def running():
     global global_timer, running_process
     while True:
+        if global_timer == -1:
+            return
         event.wait()
         if running_process is not None:
             if running_process.rank == 1 or running_process.rank == 2:
@@ -146,7 +151,7 @@ if __name__ == "__main__":
     global_timer = 0
     running_process = None
     threads = []
-    targets = [waiting, running]
+    targets = [waiting, running,]
     for target in targets:
         event = Event()
         t = Thread(target=target)
@@ -154,4 +159,3 @@ if __name__ == "__main__":
         threads.append(t)
         t.start()
     Thread(target=clock).start()
-    
