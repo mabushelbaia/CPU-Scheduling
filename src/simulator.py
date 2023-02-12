@@ -1,16 +1,15 @@
 from queue import Queue
-from threading import Thread, Event, Lock
+from threading import Thread, Event
 from time import sleep
 from workload import Process, read_processes
-import sys
 
 Queue1 = Queue()
 Queue2 = Queue()
 Queue3 = Queue()
 Queue4 = Queue()
 Queues = [Queue1, Queue2, Queue3, Queue4]
-Waiting = []
-Finished = []
+Waiting: list[Process]= []
+Finished: list[Process]= []
 
 def clock():
     global global_timer, running_process, num_processes
@@ -33,9 +32,9 @@ def clock():
                     process.status = "Ready"
                     to_append = process
                 else:                           # New process or finished waiting
-                    if process.rank == 1 and process.running_time >= 10  * 20:
+                    if process.rank == 1 and process.running_time >= 10  * 10:
                         process.rank = 2
-                    elif process.rank == 2 and process.running_time >= 10 * 10:
+                    elif process.rank == 2 and process.running_time >= 10 * 5:
                         process.rank = 3
                     Queues[process.rank - 1].put(process)
                     if process in Waiting:
@@ -44,9 +43,9 @@ def clock():
                 to_remove.append(process)
         
         if to_append is not None:
-            if process.rank == 1 and process.running_time >= 10  * 20:
+            if process.rank == 1 and process.running_time >= 10  * 10:
                 process.rank = 2
-            elif process.rank == 2 and process.running_time >= 10 * 10:
+            elif process.rank == 2 and process.running_time >= 10 * 5:
                 process.rank = 3
             Queues[to_append.rank - 1].put(to_append)
             print("📥\t\tProcess ", process.id, " is enqueued at time ", global_timer, "ms")
@@ -92,6 +91,7 @@ def clock():
         print("Time:  ", global_timer)
         print("Queue 1: ", [x.id for x in list(Queue1.queue)])
         print("Queue 2: ", [x.id for x in list(Queue2.queue)])
+        print("Queue 3: ", [x.id for x in list(Queue3.queue)])
         print("Waiting: ", [x.id for x in Waiting])
         print("Running: ", running_process.id if running_process else None)
         print("Finished: ", [x.id for x in Finished])
@@ -131,6 +131,7 @@ def running():
                 if running_process.bursts[0] == 0:
                     if len(running_process.bursts) == 1:
                         running_process.status = "Finished"
+                        print("WTF!")
                         running_process.bursts.pop(0)
                         running_process.arrival_time = global_timer + 1
                         processes.append(running_process)
