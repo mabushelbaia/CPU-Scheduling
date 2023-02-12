@@ -11,6 +11,31 @@ Queue4 = Queue()
 Queues = [Queue1, Queue2, Queue3, Queue4]
 Waiting: list[Process]= []
 Finished: list[Process]= []
+
+def gantt_chart(data):
+    #data[i] = (process_id,color id ,start_time, end_time)
+    colors={0:'white',1:'red',2:'blue',3:'green',4:'yellow'}
+    fig, ax = plt.subplots()
+    for i in data:
+        process_id=i[0]
+        queue_color=colors[i[1]]
+        start_time=i[2]
+        end_time=i[3]
+        rec = plt.Rectangle((start_time, 0), end_time - start_time, 1, facecolor=queue_color, edgecolor='black', label=f"P{process_id}")
+        #add process id to the rectangle in the gantt chart in the middle of the rectangle
+        if i[1] != 0:
+            ax.text((start_time + end_time) / 2, 0.5, f"P{process_id}", ha='center', va='center', color='black')
+        ax.add_patch(rec)
+        #add text to the rectangle with the start time and end time of the process
+    ax.set_xlim(0, data[-1][3])
+    ax.set_ylim(0, 1)
+    ax.set_xlabel('Time')
+    
+    plt.show()
+
+    
+    
+
 def get_next_queue(process: Process):
     global alpha, q1, q2
     if process.rank == 1 and process.running_time >= 10  * q1:
@@ -118,7 +143,7 @@ def clock():
                     elem.waiting_time += 1
         for process in to_remove:
             processes.remove(process)
-        dict.append(f"P{running_process.id}" if running_process else 0)
+        dict.append([running_process.id,running_process.rank,global_timer] if running_process != None else [0,0,global_timer])
         for t in threads:
             t.event.set()
         for t in threads:
@@ -132,7 +157,19 @@ def clock():
         print("Running: ", running_process.id if running_process else None)
         print("Finished: ", [x.id for x in Finished])
         if len(Finished) == num_processes:
+            data=[]
+            current=[dict[0][0],dict[0][1],dict[0][2],dict[0][2]]
+            for i in dict[1:]:
+                if i[0]==current[0] and i[1]==current[1]:
+                    current[3]=i[2]+1
+                else:
+                    data.append((current[0],current[1],current[2],current[3]))
+                    current=[i[0],i[1],i[2],i[2]]
+            data.append((current[0],current[1],current[2],current[3]))
             global_timer = -1
+            for i in data:
+                print(i)
+            gantt_chart(data)
             print(sum([x.waiting_time for x in Finished]) / len(Finished))
             os._exit(0)
         global_timer += 1
