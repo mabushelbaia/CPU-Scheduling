@@ -8,6 +8,7 @@ from gui_test import  run_gui
 from PyQt5.QtCore import QTimer
 import sys
 from PyQt5.QtWidgets import *
+from matplotlib import pyplot as plt
 
 def get_next_queue(process: Process):
     global alpha, q1, q2
@@ -22,8 +23,33 @@ def get_next_queue(process: Process):
         process.predicted_time = alpha * process.bursts[0] + (1 - alpha) * process.predicted_time
     Queues[process.rank - 1].put(process) if process.rank != 3 else Queue3.append(process)
     print("📥\t\tProcess ", process.id, " is enqueued at time ", global_timer, "ms")
-def clock()
+
+def gantt_chart(data):
+    #data[i] = (process_id,color id ,start_time, end_time)
+    colors={0:'white',1:'red',2:'blue',3:'green',4:'yellow'}
+    fig, ax = plt.subplots()
+    for i in data:
+        process_id=i[0]
+        queue_color=colors[i[1]]
+        start_time=i[2]
+        end_time=i[3]
+        rec = plt.Rectangle((start_time, 0), end_time - start_time, 1, facecolor=queue_color, edgecolor='black', label=f"P{process_id}")
+        #add process id to the rectangle in the gantt chart in the middle of the rectangle
+        if i[1] != 0:
+            ax.text((start_time + end_time) / 2, 0.5, f"P{process_id}", ha='center', va='center', color='black')
+        ax.add_patch(rec)
+        #add text to the rectangle with the start time and end time of the process
+    ax.set_xlim(0, data[-1][3])
+    ax.set_ylim(0, 1)
+    ax.set_xlabel('Time')
+    
+    plt.show()
+
+    
+    
+def clock():
     global global_timer, running_process, num_processes, gui    
+    dict = []
     while True:
             print("============================================")
             to_remove = []
@@ -112,6 +138,7 @@ def clock()
                 else:
                     for elem in list(q.queue):
                         elem.waiting_time += 1
+            dict.append([running_process.id,running_process.rank,global_timer] if running_process != None else [0,0,global_timer])
             for process in to_remove:
                 processes.remove(process)
             for t in threads:
@@ -135,9 +162,28 @@ def clock()
             print("Running: ", running_process.id if running_process else None)
             print("Finished: ", [x.id for x in Finished])
             if len(Finished) == num_processes:
+                data=[]
+                current=[dict[0][0],dict[0][1],dict[0][2],dict[0][2]]
+                for i in dict[1:]:
+                    if i[0]==current[0] and i[1]==current[1]:
+                        current[3]=i[2]+1
+                    else:
+                        data.append((current[0],current[1],current[2],current[3]))
+                        current=[i[0],i[1],i[2],i[2]]
+                data.append((current[0],current[1],current[2],current[3]))
                 global_timer = -1
-                print("Average waiting time: ", sum([x.waiting_time for x in Finished]) / len(Finished))
-                return
+                #empty spaces
+                empty=0
+                for i in data:
+                    if i[0]==0 and i[1]==0:
+                        space=i[3]-i[2]
+                        empty+=space
+                gantt_chart(data)
+                cpu_utilization=(global_timer-empty)/global_timer
+                
+                print(f"CPU Utilization: {cpu_utilization}%")
+                print(sum([x.waiting_time for x in Finished]) / len(Finished))
+                os._exit(0)
             global_timer += 1
 
 def waiting():
