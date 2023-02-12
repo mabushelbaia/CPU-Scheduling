@@ -5,7 +5,6 @@ from PyQt5.QtCore import QTimer
 class CPU_Scheduling_GUI(QMainWindow):
     def __init__(self):
         super().__init__()
-
         # Create the ready queue labels
         self.ready_queue_1_label = QLabel("Ready Queue 1")
         self.ready_queue_2_label = QLabel("Ready Queue 2")
