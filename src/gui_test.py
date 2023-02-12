@@ -86,7 +86,7 @@ class CPU_Scheduling_GUI(QMainWindow):
         self.TIME.setText(f"Time: {timer}")
     def stop_clicked(self):
         # Stop the timer
-        self.timer.stop()
+        self.signal.emit(False)
         # Add a message to the message output box
         if self.Flag:
             self.stop_button.setText("Resume")

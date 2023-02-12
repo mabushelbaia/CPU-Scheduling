@@ -8,13 +8,7 @@ from gui_test import  run_gui
 from PyQt5.QtCore import QTimer
 import sys
 from PyQt5.QtWidgets import *
-Queue1 = Queue()
-Queue2 = Queue()
-Queue3 = []
-Queue4 = Queue()
-Queues = [Queue1, Queue2, Queue3, Queue4]
-Waiting: list[Process]= []
-Finished: list[Process]= []
+
 def get_next_queue(process: Process):
     global alpha, q1, q2
     if process.rank == 1 and process.running_time >= 10  * q1:
@@ -28,124 +22,123 @@ def get_next_queue(process: Process):
         process.predicted_time = alpha * process.bursts[0] + (1 - alpha) * process.predicted_time
     Queues[process.rank - 1].put(process) if process.rank != 3 else Queue3.append(process)
     print("📥\t\tProcess ", process.id, " is enqueued at time ", global_timer, "ms")
-
-def clock():
+def clock()
     global global_timer, running_process, num_processes, gui    
     while True:
-        # # # # print("============================================")
-        to_remove = []
-        to_append = None
-        for process in processes:
-            if process.arrival_time == global_timer:
-                if process.status == "Waiting":
-                    print("⏳\t\tProcess ", process.id, " started waiting at time ", global_timer, "for ", process.bursts[0], "ms")
-                    running_process = None
-                    Waiting.append(process)
-                elif process.status == "Finished":
-                    print("🏁\t\tProcess ", process.id, " Finished at time ", global_timer, "ms")
-                    running_process = None
-                    Finished.append(process)
-                elif process.status == "Running": # Preempted process
-                    running_process = None
-                    process.status = "Ready"
-                    to_append = process
-                else:                           # New process or finished waiting
-                    get_next_queue(process)
-                    if process in Waiting:
-                        Waiting.remove(process)
-                to_remove.append(process)
-        
-        if to_append is not None:
-            get_next_queue(to_append)
+            print("============================================")
+            to_remove = []
             to_append = None
+            for process in processes:
+                if process.arrival_time == global_timer:
+                    if process.status == "Waiting":
+                        print("⏳\t\tProcess ", process.id, " started waiting at time ", global_timer, "for ", process.bursts[0], "ms")
+                        running_process = None
+                        Waiting.append(process)
+                    elif process.status == "Finished":
+                        print("🏁\t\tProcess ", process.id, " Finished at time ", global_timer, "ms")
+                        running_process = None
+                        Finished.append(process)
+                    elif process.status == "Running": # Preempted process
+                        running_process = None
+                        process.status = "Ready"
+                        to_append = process
+                    else:                           # New process or finished waiting
+                        get_next_queue(process)
+                        if process in Waiting:
+                            Waiting.remove(process)
+                    to_remove.append(process)
             
-        if running_process is not None:
-            if not Queue1.empty(): # For preemption
-                if running_process.rank > 1:
-                    Queues[running_process.rank - 1].put(running_process) if running_process.rank != 3 else Queue3.append(running_process)
-                    running_process.status = "Ready"
+            if to_append is not None:
+                get_next_queue(to_append)
+                to_append = None
+                
+            if running_process is not None:
+                if not Queue1.empty(): # For preemption
+                    if running_process.rank > 1:
+                        Queues[running_process.rank - 1].put(running_process) if running_process.rank != 3 else Queue3.append(running_process)
+                        running_process.status = "Ready"
+                        running_process = Queue1.get()
+                        running_process.status = "Running"
+                        running_process.quantum = q1
+                        print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
+
+                elif  not Queue2.empty():
+                    if running_process.rank > 2: # For preemption
+                        Queues[running_process.rank - 1].put(running_process) if running_process.rank != 3 else Queue3.append(running_process)
+                        running_process.status = "Ready"
+                        running_process = Queue2.get()
+                        running_process.status = "Running"
+                        running_process.quantum = q2
+                        print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
+                elif len(Queue3):
+                    Queue3.sort(key=lambda x: x.predicted_time)
+                    if running_process.rank >= 3: # For preemption
+                        if running_process.predicted_time > Queue3[0].predicted_time:
+                            running_process.counter += 1
+                            if running_process.counter == 3:
+                                running.process.rank = 4
+                            Queues[running_process.rank - 1].put(running_process) if running_process.rank != 3 else Queue3.append(running_process)
+                            running_process.status = "Ready"
+                            running_process = Queue3.pop(0)
+                            running_process.status = "Running"
+                            running_process.quantum = running_process.bursts[0]
+                            print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.bursts[0], "ms")
+            else:
+                if not Queue1.empty(): # Running process is None so we can run a new process
                     running_process = Queue1.get()
                     running_process.status = "Running"
                     running_process.quantum = q1
                     print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
-
-            elif  not Queue2.empty():
-                if running_process.rank > 2: # For preemption
-                    Queues[running_process.rank - 1].put(running_process) if running_process.rank != 3 else Queue3.append(running_process)
-                    running_process.status = "Ready"
+                elif not Queue2.empty(): # Running process is None so we can run a new process
                     running_process = Queue2.get()
                     running_process.status = "Running"
                     running_process.quantum = q2
                     print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
-            elif len(Queue3):
-                Queue3.sort(key=lambda x: x.predicted_time)
-                if running_process.rank >= 3: # For preemption
-                    if running_process.predicted_time > Queue3[0].predicted_time:
-                        running_process.counter += 1
-                        if running_process.counter == 3:
-                            running.process.rank = 4
-                        Queues[running_process.rank - 1].put(running_process) if running_process.rank != 3 else Queue3.append(running_process)
-                        running_process.status = "Ready"
-                        running_process = Queue3.pop(0)
-                        running_process.status = "Running"
-                        running_process.quantum = running_process.bursts[0]
-                        # # # # print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.bursts[0], "ms")
-        else:
-            if not Queue1.empty(): # Running process is None so we can run a new process
-                running_process = Queue1.get()
-                running_process.status = "Running"
-                running_process.quantum = q1
-                # # # # print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
-            elif not Queue2.empty(): # Running process is None so we can run a new process
-                running_process = Queue2.get()
-                running_process.status = "Running"
-                running_process.quantum = q2
-                # # # # print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
-            elif len(Queue3):
-                Queue3.sort(key=lambda x: x.predicted_time)
-                running_process = Queue3.pop(0)
-                running_process.status = "Running"
-                running_process.quantum = running_process.bursts[0]
-                # # # # print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.bursts[0], "ms")
-            elif not Queue4.empty():
-                running_process = Queue4.get()
-                running_process.status = "Running"
-                running_process.quantum = running_process.bursts[0]
-                # # # # print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.bursts[0], "ms")
-        for i, q in enumerate(Queues):
-            if i == 2:
-                for elem in Queue3:
-                    elem.waiting_time += 1
-            else:
-                for elem in list(q.queue):
-                    elem.waiting_time += 1
-        for process in to_remove:
-            processes.remove(process)
-        for t in threads:
-            t.event.set()
-        for t in threads:
-            t.event.clear()
-        sleep(0.05)
-        if gui:
-            Queue1_str = " ".join([f"P{i.id}" for i in list(Queue1.queue)])
-            Queue2_str = " ".join([f"P{i.id}" for i in list(Queue2.queue)])
-            Queue3_str = " ".join([f"P{i.id}" for i in Queue3])
-            Queue4_str = " ".join([f"P{i.id}" for i in list(Queue4.queue)])
-            Waiting_str = " ".join([f"P{i.id}" for i in Waiting])
-            Finished_str = " ".join([f"P{i.id}" for i in Finished])
-            gui.update_queues(Queue1_str, Queue2_str, Queue3_str, Queue4_str,Waiting_str, running_process, Finished_str, global_timer)
-        print("Time:  ", global_timer)
-        print("Queue 1: ", [x.id for x in list(Queue1.queue)])
-        print("Queue 2: ", [x.id for x in list(Queue2.queue)])
-        print("Queue 3: ", [x.id for x in Queue3])
-        print("Waiting: ", [x.id for x in Waiting])
-        print("Running: ", running_process.id if running_process else None)
-        print("Finished: ", [x.id for x in Finished])
-        if len(Finished) == num_processes:
-            global_timer = -1
-            # # # print(sum([x.waiting_time for x in Finished]) / len(Finished))
-            return
-        global_timer += 1
+                elif len(Queue3):
+                    Queue3.sort(key=lambda x: x.predicted_time)
+                    running_process = Queue3.pop(0)
+                    running_process.status = "Running"
+                    running_process.quantum = running_process.bursts[0]
+                    print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.bursts[0], "ms")
+                elif not Queue4.empty():
+                    running_process = Queue4.get()
+                    running_process.status = "Running"
+                    running_process.quantum = running_process.bursts[0]
+                    print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.bursts[0], "ms")
+            for i, q in enumerate(Queues):
+                if i == 2:
+                    for elem in Queue3:
+                        elem.waiting_time += 1
+                else:
+                    for elem in list(q.queue):
+                        elem.waiting_time += 1
+            for process in to_remove:
+                processes.remove(process)
+            for t in threads:
+                t.event.set()
+            for t in threads:
+                t.event.clear()
+            sleep(0.05)
+            if gui:
+                Queue1_str = " ".join([f"P{i.id}" for i in list(Queue1.queue)])
+                Queue2_str = " ".join([f"P{i.id}" for i in list(Queue2.queue)])
+                Queue3_str = " ".join([f"P{i.id}" for i in Queue3])
+                Queue4_str = " ".join([f"P{i.id}" for i in list(Queue4.queue)])
+                Waiting_str = " ".join([f"P{i.id}" for i in Waiting])
+                Finished_str = " ".join([f"P{i.id}" for i in Finished])
+                gui.update_queues(Queue1_str, Queue2_str, Queue3_str, Queue4_str,Waiting_str, running_process, Finished_str, global_timer)
+            print("Time:  ", global_timer)
+            print("Queue 1: ", [x.id for x in list(Queue1.queue)])
+            print("Queue 2: ", [x.id for x in list(Queue2.queue)])
+            print("Queue 3: ", [x.id for x in Queue3])
+            print("Waiting: ", [x.id for x in Waiting])
+            print("Running: ", running_process.id if running_process else None)
+            print("Finished: ", [x.id for x in Finished])
+            if len(Finished) == num_processes:
+                global_timer = -1
+                print("Average waiting time: ", sum([x.waiting_time for x in Finished]) / len(Finished))
+                return
+            global_timer += 1
 
 def waiting():
     global global_timer
@@ -199,16 +192,21 @@ if __name__ == "__main__":
     q1 = int(input("Enter time quantam for RR1: "))
     q2 = int(input("Enter time quantam for RR2: "))
     alpha = float(input("Enter alpha [0 - 1]: ")) 
-
+    Queue1 = Queue()
+    Queue2 = Queue()
+    Queue3 = []
+    Queue4 = Queue()
+    Queues = [Queue1, Queue2, Queue3, Queue4]
+    Waiting: list[Process]= []
+    Finished: list[Process]= []
     for target in targets:
         event = Event()
         t = Thread(target=target)
         t.event = event
         threads.append(t)
         t.start()
-    Thread(target=clock).start()    
     app = QApplication(sys.argv)
     gui = CPU_Scheduling_GUI()
-    gui.signal.connect(clock)
+    Thread(target=clock).start()    
     gui.show()
     sys.exit(app.exec_())
