@@ -2,8 +2,12 @@ import os
 from queue import Queue
 from threading import Thread, Event
 from time import sleep
+from gui_test import CPU_Scheduling_GUI
 from workload import Process, read_processes
-from matplotlib import pyplot as plt
+from gui_test import  run_gui
+from PyQt5.QtCore import QTimer
+import sys
+from PyQt5.QtWidgets import *
 Queue1 = Queue()
 Queue2 = Queue()
 Queue3 = []
@@ -26,10 +30,9 @@ def get_next_queue(process: Process):
     print("📥\t\tProcess ", process.id, " is enqueued at time ", global_timer, "ms")
 
 def clock():
-    global global_timer, running_process, num_processes
-    dict = []
+    global global_timer, running_process, num_processes, gui    
     while True:
-        print("============================================")
+        # # # # print("============================================")
         to_remove = []
         to_append = None
         for process in processes:
@@ -86,29 +89,29 @@ def clock():
                         running_process = Queue3.pop(0)
                         running_process.status = "Running"
                         running_process.quantum = running_process.bursts[0]
-                        print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.bursts[0], "ms")
+                        # # # # print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.bursts[0], "ms")
         else:
             if not Queue1.empty(): # Running process is None so we can run a new process
                 running_process = Queue1.get()
                 running_process.status = "Running"
                 running_process.quantum = q1
-                print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
+                # # # # print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
             elif not Queue2.empty(): # Running process is None so we can run a new process
                 running_process = Queue2.get()
                 running_process.status = "Running"
                 running_process.quantum = q2
-                print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
+                # # # # print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.quantum, "ms")
             elif len(Queue3):
                 Queue3.sort(key=lambda x: x.predicted_time)
                 running_process = Queue3.pop(0)
                 running_process.status = "Running"
                 running_process.quantum = running_process.bursts[0]
-                print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.bursts[0], "ms")
+                # # # # print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.bursts[0], "ms")
             elif not Queue4.empty():
                 running_process = Queue4.get()
                 running_process.status = "Running"
                 running_process.quantum = running_process.bursts[0]
-                print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.bursts[0], "ms")
+                # # # # print("🏃\t\tProcess ", (running_process.id, running_process.rank), " is running at time ", global_timer, "ms for ", running_process.bursts[0], "ms")
         for i, q in enumerate(Queues):
             if i == 2:
                 for elem in Queue3:
@@ -118,12 +121,19 @@ def clock():
                     elem.waiting_time += 1
         for process in to_remove:
             processes.remove(process)
-        dict.append(f"P{running_process.id}" if running_process else 0)
         for t in threads:
             t.event.set()
         for t in threads:
             t.event.clear()
-        sleep(0.01)
+        sleep(0.05)
+        if gui:
+            Queue1_str = " ".join([f"P{i.id}" for i in list(Queue1.queue)])
+            Queue2_str = " ".join([f"P{i.id}" for i in list(Queue2.queue)])
+            Queue3_str = " ".join([f"P{i.id}" for i in Queue3])
+            Queue4_str = " ".join([f"P{i.id}" for i in list(Queue4.queue)])
+            Waiting_str = " ".join([f"P{i.id}" for i in Waiting])
+            Finished_str = " ".join([f"P{i.id}" for i in Finished])
+            gui.update_queues(Queue1_str, Queue2_str, Queue3_str, Queue4_str,Waiting_str, running_process, Finished_str, global_timer)
         print("Time:  ", global_timer)
         print("Queue 1: ", [x.id for x in list(Queue1.queue)])
         print("Queue 2: ", [x.id for x in list(Queue2.queue)])
@@ -133,10 +143,9 @@ def clock():
         print("Finished: ", [x.id for x in Finished])
         if len(Finished) == num_processes:
             global_timer = -1
-            print(sum([x.waiting_time for x in Finished]) / len(Finished))
-            os._exit(0)
+            # # # print(sum([x.waiting_time for x in Finished]) / len(Finished))
+            return
         global_timer += 1
-
 
 def waiting():
     global global_timer
@@ -182,17 +191,24 @@ def running():
 if __name__ == "__main__":
     processes = read_processes("processes.txt")
     num_processes = len(processes)
+    gui = None
     global_timer = 0
     running_process = None
     threads = []
-    targets = [waiting, running,]
+    targets = [waiting, running]
     q1 = int(input("Enter time quantam for RR1: "))
     q2 = int(input("Enter time quantam for RR2: "))
     alpha = float(input("Enter alpha [0 - 1]: ")) 
+
     for target in targets:
         event = Event()
         t = Thread(target=target)
         t.event = event
         threads.append(t)
         t.start()
-    Thread(target=clock).start()
+    Thread(target=clock).start()    
+    app = QApplication(sys.argv)
+    gui = CPU_Scheduling_GUI()
+    gui.signal.connect(clock)
+    gui.show()
+    sys.exit(app.exec_())
