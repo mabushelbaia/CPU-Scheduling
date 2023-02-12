@@ -12,6 +12,7 @@ Queues = [Queue1, Queue2, Queue3, Queue4]
 Waiting = []
 Finished = []
 
+
 def clock():
     global global_timer, running_process, num_processes
     while True:
