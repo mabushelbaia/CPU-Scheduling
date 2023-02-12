@@ -11,6 +11,8 @@ class Process:
         self.quantum = 0
         self.running_time = 0
         self.waiting_time = 0
+        self.predicted_time = 0
+        self.counter = 0
 
     def __str__(self) -> str:
         return f"{self.id} {self.arrival_time} {' '.join([str(burst) for burst in self.bursts])}"
