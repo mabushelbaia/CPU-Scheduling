@@ -8,13 +8,8 @@ class Process:
         self.bursts = bursts
         self.rank = 1
         self.counter = 0
-        self.predicted_time = 0
-        self.execution_time = 0
-        self.remaining_time = 0
-        self.waiting_time = 0
-        self.IO_time = 0
-        self.waiting = False
-        self.finished = False
+        self.status = "Readay"
+        self.quantum = 0
 
     def __str__(self) -> str:
         return f"{self.id} {self.arrival_time} {' '.join([str(burst) for burst in self.bursts])}"
