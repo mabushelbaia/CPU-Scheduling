@@ -4,6 +4,7 @@ from threading import Thread, Event
 from time import sleep
 from workload import Process, read_processes
 from matplotlib import pyplot as plt
+import keyboard
 Queue1 = Queue()
 Queue2 = Queue()
 Queue3 = []
@@ -11,6 +12,7 @@ Queue4 = Queue()
 Queues = [Queue1, Queue2, Queue3, Queue4]
 Waiting: list[Process]= []
 Finished: list[Process]= []
+flag=False
 
 def gantt_chart(data):
     #data[i] = (process_id,color id ,start_time, end_time)
@@ -53,7 +55,7 @@ def get_next_queue(process: Process):
 def clock():
     global global_timer, running_process, num_processes
     dict = []
-    while True:
+    while True and not flag:
         print("============================================")
         to_remove = []
         to_append = None
@@ -223,6 +225,9 @@ def running():
                     running_process.arrival_time = global_timer + 1
                     processes.append(running_process)
 
+    
+        
+
 if __name__ == "__main__":
     processes = read_processes("processes.txt")
     num_processes = len(processes)
@@ -239,4 +244,4 @@ if __name__ == "__main__":
         t.event = event
         threads.append(t)
         t.start()
-    Thread(target=clock).start()
+    thread=Thread(target=clock).start()
