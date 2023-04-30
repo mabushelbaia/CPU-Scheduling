@@ -1,6 +1,5 @@
 # CPU Scheduling
-🔗 | [Project Description](Project.pdf)  
-🔗 | [Report](Report.pdf)
+🔗 | [Project Description](project.pdf)  
 ## Group
 - Mohammad Abu-Shelbaia 
 - Nidal Zabade 
